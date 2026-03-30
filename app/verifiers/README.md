@@ -8,4 +8,11 @@ Este módulo maneja toda la lógica de validación.
 - Manejar tanto validaciones basadas en DataFrame como validaciones de entradas individuales.
 
 ## Implemented verifications
-- 
+There's two kinds of verifications:
+1. Products verifications:
+    - All positive values 
+    - All products names inserted in the dataframe match with the database records
+2. Raw material verifications:
+    - All positive values
+    - All raw material names inserted in the dataframe match with the database records
+    - In case of `stock-out`, checks if the entered amount surpasses the stored amount 

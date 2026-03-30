@@ -11,3 +11,5 @@ Para mayor claridad mental y consistencia, las importaciones en este proyecto si
 ## Responsibilities
 - Sirve como interfaz entre la base de datos y la lógica de la aplicación. 
 - Ofrece utilidades reutilizables  
+
+#

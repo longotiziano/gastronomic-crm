@@ -3,16 +3,11 @@ from app.models.auto_models import Products
 import pandas as pd
 
 class ProductVerifier(VerifyExistence, StockAmountVerifier):
-    @property
-    def model(self):
-        return Products
-
-    @property
-    def name(self):
-        return "product_name"
+    model = Products
+    name = "product_name"
 
 class ProductDfVerifier(ProductVerifier):
-    def products_df_verifier(self, r_id: int, df: pd.DataFrame) -> tuple[bool, str | dict]:
+    def products_df_verifier(self, r_id: int, df: pd.DataFrame) -> tuple[bool, dict]:
         '''
         Verifica los aspectos de los productos en un DataFrame
         - Su existencia
@@ -32,4 +27,4 @@ class ProductDfVerifier(ProductVerifier):
         if errors_dict:
             return False, errors_dict
         
-        return True, None
+        return True, {}

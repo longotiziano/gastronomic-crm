@@ -1,6 +1,5 @@
 nav {
-    position: relative;
-    width: 100%;
+    width: 100vw;
     height: 70px;
     display: flex;
     align-items: center;
@@ -16,18 +15,51 @@ nav img {
     margin-right: auto;
 }
 
-nav ul {
-    flex: 1;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 60px;
-}
-
-nav button {
+.nav-button {
     width: auto;
     height: 100%;
     padding: 0.8rem;
-    margin-left: auto;
+    margin: 0.8rem;
 }
+
+.section-ul {
+    text-align: center;
+    width: auto;
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 15px;
+    margin: 10px;
+}
+
+.section-ul li {
+    flex: 1
+}
+
+.section-ul button {
+    position: relative; /* for the animations */ 
+    width: 100%;
+    height: 100%;
+    font-size: 1rem;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+.section-ul button::after {
+    content: '';        
+    position: absolute; 
+    bottom: 0;         
+    left: 0;           
+    width: 100%;       
+    height: 100%;      
+    background: rgba(95, 95, 95, 0.164);   
+    border-bottom: 2px solid rgb(255, 123, 0); 
+    transform: scaleX(0); 
+    transition: transform 0.3s ease;
+}
+
+.section-ul button:hover::after {
+    transform: scaleX(1);
+}
+

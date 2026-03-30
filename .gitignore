@@ -9,10 +9,5 @@ __pycache__/
 *.pyd
 *.sqlite3
 
-# Docker
-*.log
-*.pid
-*.swp
-
 # VS Code
 .vscode/

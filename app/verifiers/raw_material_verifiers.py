@@ -4,13 +4,8 @@ import pandas as pd
 from typing import Literal
 
 class RawMaterialVerifier(VerifyExistence, StockAmountVerifier):
-    @property
-    def model(self):
-        return RawMaterial
-    
-    @property
-    def name(self):
-        return "rm_name"
+    model = RawMaterial
+    name = "rm_name"
 
 class RawMaterialDfVerifier(RawMaterialVerifier):
     '''
@@ -26,7 +21,7 @@ class RawMaterialDfVerifier(RawMaterialVerifier):
         r_id: int, 
         df: pd.DataFrame, 
         direction: Literal["stock_in", "stock_out"] = "stock_in"
-        ) -> tuple[bool, None | dict]:
+        ) -> tuple[bool, dict]:
         errors_dict = {}
 
         exists_ok, exists_err = self.verify_existence_from_df(r_id, df)
@@ -45,5 +40,5 @@ class RawMaterialDfVerifier(RawMaterialVerifier):
         if errors_dict:
             return False, errors_dict
         
-        return True, None
+        return True, {}
     
