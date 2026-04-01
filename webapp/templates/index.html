@@ -8,9 +8,11 @@
     
     <link rel="stylesheet" href="../static/css/body.css">
     <link rel="stylesheet" href="../static/css/nav.css">
-    <link rel="stylesheet" href="../static/css/sidebar.css">
+    <link rel="stylesheet" href="../static/css/sales.css">
     
     <link rel="icon" href="../static/img/icon-club-serrano.jpg" type="image/jpg"/>
+
+    <script type="module" src="../static/js/main.js" defer></script>
 </head>
 <body>
     <header>
@@ -21,20 +23,20 @@
             </button>
             <ul class="section-ul">
                 <li>
-                    <button>Ventas</button>
+                    <button data-section="sales">Ventas</button>
                 </li>
                 <li>
-                    <button>Inventario</button>
+                    <button data-section="inventory">Inventario</button>
                 </li>
                 <li>
-                    <button>Reportes</button>
+                    <button data-section="reports">Reportes</button>
                 </li>
                 <li>
-                    <button>Empleados</button>
+                    <button data-section="employees">Empleados</button>
                 </li>
                 <li>
-                    <button>Datos</button>    
-                </li>
+                    <button data-section="data">Datos</button>    
+                </li>   
             </ul>
             <button class="nav-button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-text-align-justify-icon lucide-text-align-justify"><path d="M3 5h18"/><path d="M3 12h18"/><path d="M3 19h18"/></svg>
@@ -42,11 +44,25 @@
         </nav>
     </header>
     <main>
-        <div class="graphs-sidebar">
-            <h2>Controladores</h2>
+        <div class="section active" id="sales">
+            <div class="graphs-sidebar">
+                <h2>Controladores</h2>
+            </div>
+            <div class="graphs">
+                <h2>Acá irían los gráficos</h2>
+            </div>
         </div>
-        <div class="graphs">
-            <h2>Acá irían los gráficos</h2>
+        <div class="section" id="inventory">
+            <h2>Panel de inventario</h2>
+        </div>
+        <div class="section" id="reports">
+            <h2>Reportes</h2>
+        </div>
+        <div class="section" id="employees">
+            <h2>Empleados</h2>
+        </div>
+        <div class="section" id="data">
+            <h2>Datos</h2>
         </div>
     </main>
 </body>
