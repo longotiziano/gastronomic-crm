@@ -5,7 +5,7 @@
     border: none;
     list-style: none;
     box-sizing: border-box;
-    outline: 1px solid red;
+    outline: 0  solid rgba(255, 0, 0, 0.267);
 }
 
 body {
@@ -41,15 +41,24 @@ main {
     transform: translateX(-100%);
 }
 
-.graphs {
-    flex: 6 0 auto;
-    background-color: rgb(49, 49, 49);
-    border-radius: 10px;
-    box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.5);
-    padding: 10px
-}
-
 button {
     cursor: pointer;
     color: aliceblue
+}
+
+.title {
+    width: 100%;
+    padding-bottom: 0.4rem;
+    margin-bottom: 1rem; 
+    border-bottom: 2px solid rgba(139, 139, 139, 0.27);
+    font-size:1.7rem;
+    font-weight: 700;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    font-weight: 700;
+    width: 100%;
+    padding-bottom: 0.4rem;
+    margin-bottom: 1rem; 
 }

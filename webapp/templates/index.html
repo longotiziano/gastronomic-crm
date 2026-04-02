@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,7 @@
     
     <link rel="stylesheet" href="../static/css/body.css">
     <link rel="stylesheet" href="../static/css/nav.css">
-    <link rel="stylesheet" href="../static/css/sales.css">
+    <link rel="stylesheet" href="../static/css/reports.css">
     
     <link rel="icon" href="../static/img/icon-club-serrano.jpg" type="image/jpg"/>
 
@@ -23,13 +23,13 @@
             </button>
             <ul class="section-ul">
                 <li>
+                    <button data-section="reports">Reportes</button>
+                </li>
+                <li>
                     <button data-section="sales">Ventas</button>
                 </li>
                 <li>
                     <button data-section="inventory">Inventario</button>
-                </li>
-                <li>
-                    <button data-section="reports">Reportes</button>
                 </li>
                 <li>
                     <button data-section="employees">Empleados</button>
@@ -44,19 +44,57 @@
         </nav>
     </header>
     <main>
-        <div class="section active" id="sales">
+        <div class="section active" id="reports">
             <div class="graphs-sidebar">
-                <h2>Controladores</h2>
+                <h2 class="title">Controladores</h2>
+                <div class="area-control">    
+                    <h3 class="subtitle">Control de área</h3>
+                    <ul>
+                        <li>
+                            <details>
+                                <summary class="subtitle">Ventas</summary>
+                                <ul>
+                                    <li><button>General</button></li>
+                                    <li><button>Productos</button></li>
+                                    <li><button>Financiero</button></li>
+                                </ul>
+                            </details>
+                        </li>
+                        <li>
+                            <details>
+                                <summary class="subtitle">Inventario</summary>
+                                <ul>
+                                    <li><button>General</button></li>
+                                    <li><button>Productos</button></li>
+                                    <li><button>Financiero</button></li>
+                                </ul>
+                            </details>
+                        </li>
+                        <li>
+                            <details>
+                                <summary class="subtitle">Empleados</summary>
+                                <ul>
+                                    <li><button>General</button></li>
+                                    <li><button>Productos</button></li>
+                                    <li><button>Financiero</button></li>
+                                </ul>
+                            </details>
+                        </li>
+                    </ul>
+                </div>
+                <div class="date-control">
+                    <h3 class="subtitle">Control temporal</h3>
+                </div>
             </div>
             <div class="graphs">
-                <h2>Acá irían los gráficos</h2>
+                <h2 class="title">Acá irían los gráficos</h2>
             </div>
+        </div>
+        <div class="section" id="sales">
+            <h2>Ventas</h2>
         </div>
         <div class="section" id="inventory">
             <h2>Panel de inventario</h2>
-        </div>
-        <div class="section" id="reports">
-            <h2>Reportes</h2>
         </div>
         <div class="section" id="employees">
             <h2>Empleados</h2>

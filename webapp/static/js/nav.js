@@ -24,9 +24,8 @@ export const showSection = (sections, name) => {
 
     Object.values(sections).forEach(({ index, element }) => {
         console.log("Removing the classes for the following element -> ", element)
-        element.classList.remove('active', 'left', 'right');
+        element.classList.remove('active', 'left');
         if (index < newIndex) element.classList.add('left');
-        else if (index > newIndex) element.classList.add('right');
     });
 
     sections[name].element.classList.add('active');
