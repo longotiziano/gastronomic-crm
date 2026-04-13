@@ -1,6 +1,7 @@
 # Archivos de entorno
 .env
 .venv
+venv
 
 # Python
 __pycache__/
@@ -9,6 +10,9 @@ __pycache__/
 *.pyo
 *.pyd
 *.sqlite3
+
+# Logs
+logs/logs.csv
 
 # VS Code
 .vscode/

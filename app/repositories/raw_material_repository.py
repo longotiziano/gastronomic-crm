@@ -1,5 +1,6 @@
 from app.models.auto_models import RawMaterial, Stock
 from app.repositories.base_repository import Repository
+from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import joinedload
 import pandas as pd
 from typing import Literal
@@ -46,30 +47,35 @@ class RawMaterialRepository(Repository):
         r_id: int,  
         df: pd.DataFrame,   
         direction: Literal["stock_in", "stock_out"] = "stock_in"
-        ) -> None:
+        ) -> tuple[bool, str]:
         '''
         Actualizando las cantidades de stock basadas en un DataFrame
         ''' 
         # Construyendo el diccionario
         rm_dict = self._rm_df_to_dict(df)
 
-        # Consultando el stock perteneciente al restaurante y coincidiendoló al nombre de las respectivas materias primas
-        stocks = (
-            self.session.query(Stock)
-            .join(RawMaterial, Stock.rm_id == RawMaterial.rm_id)
-            .filter(
-                RawMaterial.r_id == int(r_id),
-                RawMaterial.rm_name.in_(rm_dict.keys())
+        # Grabbing the stock for each raw material
+        try:    
+            stocks = (
+                self.session.query(Stock)
+                .join(RawMaterial, Stock.rm_id == RawMaterial.rm_id)
+                .filter(
+                    RawMaterial.r_id == int(r_id),
+                    RawMaterial.rm_name.in_(rm_dict.keys())
+                )
+                .options(joinedload(Stock.raw_material)) # keeping the table in the variable
+                .all()
             )
-            .options(joinedload(Stock.raw_material))  
-            .all()
-        )
+        except SQLAlchemyError as e:
+            er = f"Unexpected error ocurred while finding stock's amounts -> Error: {e}"
+            logger.error(er)
+            return False, er
 
-        # Actualizar las cantidades
         for stock in stocks:
             rm_name = stock.raw_material.rm_name
             amount = rm_dict.get(rm_name, 0)
             if direction == "stock_out":
                 amount = -amount
             stock.stock_amount = float(stock.stock_amount) + amount
-                    
+        
+        return True, ""

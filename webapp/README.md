@@ -1,28 +1,26 @@
-# Web panel
+# webapp
 
 This is the client-side of the program. 
 
-## Responsibilities
-
-### Data uploading
-
-### Data sharing
-
-### Data analytics
-
 ## Sections
 
-### Sales
-This will be the default section, containing:
-- Sales graph by period
+### Reports
+This will be the default section, containing several analytics:
+- Performance graph by period
 - KPIs of average periodic sales, busiest periods
 - Net profit (items sold - raw material - other spends)
 
-### Inventory Managment
-- 
+### Sales
+- File's consume (products) upload buttons (if file of sales, then actualize the raw material too)
+- "Add product" button -> name, price, 
+- Mark with a warning those products without recipes
 
-### Reports
-In progress.
+### Inventory Managment
+- File's consume upload (raw material) buttons
+- Table's with all the data about recipes and raw material
+- Add raw material button
+- Quick access to the recents raw material consume based on the products inserted
+- Low-stock alerts on certain items
 
 ### Employees
 In progress.

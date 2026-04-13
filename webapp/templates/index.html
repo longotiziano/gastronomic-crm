@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../static/css/body.css">
     <link rel="stylesheet" href="../static/css/nav.css">
     <link rel="stylesheet" href="../static/css/reports.css">
+    <link rel="stylesheet" href="../static/css/inventory.css">
     
     <link rel="icon" href="../static/img/icon-club-serrano.jpg" type="image/jpg"/>
 
@@ -45,7 +46,7 @@
     </header>
     <main>
         <div class="section active" id="reports">
-            <div class="graphs-sidebar">
+            <div class="block graphs-sidebar">
                 <h2 class="title">Controladores</h2>
                 <div class="area-control">    
                     <h3 class="subtitle">Control de área</h3>
@@ -89,10 +90,34 @@
                     </ul>
                 </div>
                 <div class="date-control">
-                    <h3 class="subtitle">Control temporal</h3>
+                    <h3 class="subtitle">Control de fechas</h3>
+                    <ul>
+                        <li>
+                            <details>
+                                <summary>
+                                    <span>Rangos</span>
+                                </summary>
+                                <ul>
+                                    <li><button>General</button></li>
+                                    <li><button>Productos</button></li>
+                                    <li><button>Financiero</button></li>
+                                </ul>
+                            </details>
+                        </li>
+                        <li>
+                            <button>Rangos personalizados</button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="sector-control">
+                    <h3 class="subtitle">Control de sectores</h3>
+                                <ul>
+                                    <li><button>Barra</button></li>
+                                    <li><button>Cocina</button></li>
+                                </ul>
                 </div>
             </div>
-            <div class="graphs">
+            <div class="block graphs">
                 <h2 class="title">Acá irían los gráficos</h2>
             </div>
         </div>
@@ -100,7 +125,13 @@
             <h2>Ventas</h2>
         </div>
         <div class="section" id="inventory">
-            <h2>Panel de inventario</h2>
+            <div class="block">
+                
+            </div>
+            <div class="block">
+                
+            </div>
+
         </div>
         <div class="section" id="employees">
             <h2>Empleados</h2>
