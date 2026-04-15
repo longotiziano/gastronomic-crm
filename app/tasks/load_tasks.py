@@ -30,7 +30,7 @@ def load_data_task(
         update_ok, er = rm_repo.update_stock_amounts(r_id, df, direction)
         if not update_ok:
             return False, er
-        
+        # LO DEJE ACA, SE DEBERIA HACER UNA TASK EXCLUSIVA PARA LA CARGA DE DATOS!
         list_of_dicts = df.to_dict(orient='records')
         try:
             session.bulk_insert_mappings(table, list_of_dicts) # type: ignore
