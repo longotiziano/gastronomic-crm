@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../static/css/nav.css">
     <link rel="stylesheet" href="../static/css/reports.css">
     <link rel="stylesheet" href="../static/css/inventory.css">
+    <link rel="stylesheet" href="../static/css/buttons.css">
     
     <link rel="icon" href="../static/img/icon-club-serrano.jpg" type="image/jpg"/>
 
@@ -19,9 +20,17 @@
     <header>
         <nav>
             <img src="../static/img/logo-club-serrano.png" alt="Logo de Club Serrano">
-            <button class="nav-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
-            </button>
+            <div style="position: relative; border-color: aqua;">
+                <button class="nav-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <div class="restaurant-menu" id="menu">
+                    <ul class="selectables">
+                        <li><button>Club Serrano</button></li>
+                        <li><button>Kubo</button></li>
+                    </ul>
+                </div>
+            </div>
             <ul class="section-ul">
                 <li>
                     <button data-section="reports">Reportes</button>
@@ -56,7 +65,7 @@
                                 <summary>
                                     <span>Ventas</span>
                                 </summary>
-                                <ul>
+                                <ul class="selectables">
                                     <li><button>General</button></li>
                                     <li><button>Productos</button></li>
                                     <li><button>Financiero</button></li>
@@ -68,7 +77,7 @@
                                 <summary>
                                     <span>Inventario</span>
                                 </summary>
-                                <ul>
+                                <ul class="selectables">
                                     <li><button>General</button></li>
                                     <li><button>Productos</button></li>
                                     <li><button>Financiero</button></li>
@@ -80,7 +89,7 @@
                                 <summary>
                                     <span>Empleados</span>
                                 </summary>
-                                <ul>
+                                <ul class="selectables">
                                     <li><button>General</button></li>
                                     <li><button>Productos</button></li>
                                     <li><button>Financiero</button></li>
@@ -97,21 +106,21 @@
                                 <summary>
                                     <span>Rangos</span>
                                 </summary>
-                                <ul>
+                                <ul class="selectables">
                                     <li><button>General</button></li>
                                     <li><button>Productos</button></li>
                                     <li><button>Financiero</button></li>
                                 </ul>
                             </details>
                         </li>
-                        <li>
+                        <li class="selectables">
                             <button>Rangos personalizados</button>
                         </li>
                     </ul>
                 </div>
                 <div class="sector-control">
                     <h3 class="subtitle">Control de sectores</h3>
-                                <ul>
+                                <ul class="selectables">
                                     <li><button>Barra</button></li>
                                     <li><button>Cocina</button></li>
                                 </ul>

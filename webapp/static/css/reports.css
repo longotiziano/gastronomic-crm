@@ -17,18 +17,6 @@
     flex-direction: column;
 }
 
-.graphs-sidebar button {
-    margin: 0.1rem 0.1rem 0.1rem 1rem;
-    width: 100%;
-    padding: 0.3rem; 
-    border-radius: 5px;
-    text-align: left;
-}
-
-.graphs-sidebar button:hover {
-    background-color: rgba(124, 124, 124, 0.516);
-}
-
 .graphs-sidebar details ul {
     margin: 0.5rem 0 0.5rem 0;
 }

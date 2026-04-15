@@ -1,0 +1,19 @@
+.nav-button {
+    position: relative;
+    width: auto;
+    height: 100%;
+    padding: 0.8rem;
+    margin: 0.8rem;
+}
+
+.selectables button {
+    margin: 0.1rem 0.1rem 0.1rem 1rem;
+    width: 100%;
+    padding: 0.3rem; 
+    border-radius: 5px;
+    text-align: left;
+}
+
+.selectables button:hover {
+    background-color: rgba(124, 124, 124, 0.516);
+}

@@ -15,11 +15,11 @@ nav img {
     margin-right: auto;
 }
 
-.nav-button {
-    width: auto;
-    height: 100%;
-    padding: 0.8rem;
-    margin: 0.8rem;
+.restaurant-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 100;
 }
 
 .section-ul {

@@ -30,3 +30,7 @@ export const showSection = (sections, name) => {
 
     sections[name].element.classList.add('active');
 };
+
+/**
+ * Receives:
+ */
