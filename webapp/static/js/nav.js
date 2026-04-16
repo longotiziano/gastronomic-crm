@@ -1,16 +1,4 @@
 /**
- * disables all buttons and selects the clicked one
- * @param {Element} clickedBtn 
- * @param {NodeList} allBtns 
- */
-export const changeSection = (clickedBtn, allBtns) => {
-  allBtns.forEach(btn => btn.classList.remove('active'));
-  
-  clickedBtn.classList.add('active');
-  console.log(`Selected section: ${clickedBtn.textContent}`)
-};
-
-/**
  * Receives:
  * - a section object
  * - An ID

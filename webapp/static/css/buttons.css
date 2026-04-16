@@ -1,6 +1,6 @@
 .nav-button {
     position: relative;
-    width: auto;
+    width: 100%s;
     height: 100%;
     padding: 0.8rem;
     margin: 0.8rem;
@@ -14,6 +14,50 @@
     text-align: left;
 }
 
-.selectables button:hover {
-    background-color: rgba(124, 124, 124, 0.516);
+.selectables:not(.section-ul) button:hover {
+    background-color: rgba(124, 124, 124, 0.226);
 }
+
+.selectables.menu-button button {
+    margin: 0.1rem;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.selectables.section-ul button {
+    position: relative; /* for the animations */ 
+    width: 100%;
+    height: 100%;
+    font-size: 1rem;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 0;
+    margin: 0;
+    text-align: center;
+    padding: 0;
+}
+
+.selectables.section-ul button::after {
+    content: '';        
+    position: absolute; 
+    bottom: 0;         
+    left: 0;           
+    width: 100%;       
+    height: 100%;      
+    background: rgba(95, 95, 95, 0.164);   
+    border-bottom: 2px solid rgb(255, 123, 0); 
+    transform: scaleX(0); 
+    transition: transform 0.3s ease;
+}
+
+.selectables.section-ul button:hover::after { 
+    background-color: rgba(124, 124, 124, 0.226);
+    transform: scaleX(1); 
+}
+
+.selectables.section-ul button.active::after {
+    transform: scaleX(1);
+    border-bottom: 2px solid rgb(255, 123, 0);
+    background: rgba(95, 95, 95, 0.3);
+}
+
+.selectables.section-ul button.active { font-weight: 700; }

@@ -1,13 +1,14 @@
-import { changeSection, showSection } from './nav.js';
+import { showSection } from './nav.js';
 import { createIndexObject } from './utils.js';
+import { selectOption } from './selectables.js';
 
-const btns = document.querySelectorAll('.section-ul button');
+const btnsSection = document.querySelectorAll('.section-ul button');
 const sectionsList = document.querySelectorAll('main > div'); 
 const sections = createIndexObject(sectionsList)
 
-btns.forEach(btn => {
+btnsSection.forEach(btn => {
     btn.addEventListener('click', () => {
-        changeSection(btn, btns);
+        selectOption(btn, btnsSection);
         showSection(sections, btn.dataset.section);
     });
 });
