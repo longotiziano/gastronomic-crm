@@ -1,0 +1,24 @@
+/* 
+This class contains all dropdown menus
+Those are divs that contains two brother elements: 
+- a button to collapse and expand the menu
+- and a div, which contains the menu itself
+ */
+.menu {
+    position: relative;
+}
+
+.desplegable {
+    display: none;
+    position: absolute;
+    min-width: 200px;
+    z-index: 100;
+    overflow: hidden;
+}
+
+.desplegable.active {
+    display: block;
+    padding: 10px;
+    top: 100%;
+    left: 0;
+}

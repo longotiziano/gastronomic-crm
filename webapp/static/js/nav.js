@@ -20,5 +20,13 @@ export const showSection = (sections, name) => {
 };
 
 /**
- * Receives:
+ * Looks for every div with ".menu" class and allows expanding and collapsing the menu
  */
+export const initDisplayMenus = () => {
+    const menus = document.querySelectorAll(".menu");
+    menus.forEach(menu => {
+        const btn = menu.querySelector(":scope > button");
+        const desplegable = menu.querySelector(":scope > div");
+        btn.addEventListener("click", () => desplegable.classList.toggle("active"));
+        })
+    };

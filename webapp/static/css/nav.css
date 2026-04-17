@@ -15,15 +15,6 @@ nav img {
     margin-right: auto;
 }
 
-.restaurant-menu {
-    position: absolute;
-    padding: 10px;
-    top: 100%;
-    min-width: 200px;
-    left: 0;
-    z-index: 100;
-}
-
 .section-ul {
     text-align: center;
     width: auto;
