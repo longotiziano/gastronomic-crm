@@ -1,3 +1,6 @@
+import { createIndexObject } from './utils.js';
+import { selectOption } from './selectables.js';
+
 /**
  * Receives:
  * - a section object
@@ -29,4 +32,18 @@ export const initDisplayMenus = () => {
         const desplegable = menu.querySelector(":scope > div");
         btn.addEventListener("click", () => desplegable.classList.toggle("active"));
         })
-    };
+};
+
+/**
+ * Allows the sections to slide to the left or the right, depending on the position
+ */ 
+export const initSections = () => {
+    const sections = createIndexObject(document.querySelectorAll('main > div'));
+    const btnsSection = document.querySelectorAll('.section-ul button');
+    btnsSection.forEach(btn => {
+    btn.addEventListener('click', () => {
+        selectOption(btn, btnsSection);
+        showSection(sections, btn.dataset.section);
+    });
+});
+};
