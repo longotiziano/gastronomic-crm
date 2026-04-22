@@ -1,11 +1,10 @@
-from sql.database import Base
+from sql.database import AutoBase
 
-Restaurants = Base.classes.restaurants
-Products_categories = Base.classes.products_categories
-Products = Base.classes.products
-RawMaterial = Base.classes.raw_material    
-RawMaterialCategories = Base.classes.raw_material_categories
-Recipes = Base.classes.recipes
-Sales = Base.classes.sales
-StockMovements = Base.classes.stock_movements
-Stock = Base.classes.stock
+Products_categories = AutoBase.classes.products_categories
+Products = AutoBase.classes.products
+RawMaterial = AutoBase.classes.raw_material    
+RawMaterialCategories = AutoBase.classes.raw_material_categories
+Recipes = AutoBase.classes.recipes
+Sales = AutoBase.classes.sales
+StockMovements = AutoBase.classes.stock_movements
+Stock = AutoBase.classes.stock

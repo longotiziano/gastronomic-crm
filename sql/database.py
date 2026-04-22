@@ -1,5 +1,5 @@
 from sqlalchemy.ext.automap import automap_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, DeclarativeBase
 from sqlalchemy import create_engine
 
 # import os
@@ -11,7 +11,10 @@ from sqlalchemy import create_engine
 
 engine = create_engine(f'sqlite:///db-sqlite.db')
 
-Base = automap_base()
-Base.prepare(autoload_with=engine)
+class Base(DeclarativeBase):
+    pass
+
+AutoBase = automap_base()
+AutoBase.prepare(autoload_with=engine)
 
 SessionLocal = sessionmaker(bind=engine)
