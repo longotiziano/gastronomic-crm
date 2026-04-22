@@ -6,16 +6,36 @@
     margin: 0.8rem;
 }
 
-.selectables button {
+.selectables button, .actionable {
     margin: 0.1rem 0.1rem 0.1rem 1rem;
     width: 100%;
     padding: 0.3rem; 
     border-radius: 5px;
     text-align: left;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    cursor: pointer;
 }
 
-.selectables:not(.section-ul) button:hover {
+.actionable, .upload {
+    display: inline-block;
+    margin: 0.6rem 0.1rem 0.6rem 0.1rem;
+    text-align: center;
+    border: 2px solid rgba(124, 124, 124, 0.123);
+}
+
+.upload {
+    border-radius: 5px;
+    border-bottom: 0px; /* prevents duplicated borders with actionables */
+}
+
+.upload > .actionable {
+    margin: 0px;
+    border-radius: 0px;
+    border: 0px;
+    border-bottom: 2px solid rgba(124, 124, 124, 0.123);
+}
+
+.selectables:not(.section-ul) button:hover, .actionable:hover {
     background-color: rgba(124, 124, 124, 0.123);
 }
 

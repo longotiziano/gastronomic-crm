@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../static/css/nav.css">
     <link rel="stylesheet" href="../static/css/reports.css">
     <link rel="stylesheet" href="../static/css/inventory.css">
-    <link rel="stylesheet" href="../static/css/buttons.css">
+    <link rel="stylesheet" href="../static/css/selectables.css">
     <link rel="stylesheet" href="../static/css/menus.css">
     
     <link rel="icon" href="../static/img/icon-club-serrano.jpg" type="image/jpg"/>
@@ -60,13 +60,13 @@
                 <h2 class="title">Controladores</h2>
                 <div class="area-control">    
                     <h3 class="subtitle">Control de área</h3>
-                    <ul>
+                    <ul class="selectables">
                         <li>
                             <details>
                                 <summary>
                                     <span>Ventas</span>
                                 </summary>
-                                <ul class="selectables">
+                                <ul>
                                     <li><button>General</button></li>
                                     <li><button>Productos</button></li>
                                     <li><button>Financiero</button></li>
@@ -78,7 +78,7 @@
                                 <summary>
                                     <span>Inventario</span>
                                 </summary>
-                                <ul class="selectables">
+                                <ul>
                                     <li><button>General</button></li>
                                     <li><button>Productos</button></li>
                                     <li><button>Financiero</button></li>
@@ -90,7 +90,7 @@
                                 <summary>
                                     <span>Empleados</span>
                                 </summary>
-                                <ul class="selectables">
+                                <ul>
                                     <li><button>General</button></li>
                                     <li><button>Productos</button></li>
                                     <li><button>Financiero</button></li>
@@ -101,20 +101,11 @@
                 </div>
                 <div class="date-control">
                     <h3 class="subtitle">Control de fechas</h3>
-                    <ul>
-                        <li>
-                            <details>
-                                <summary>
-                                    <span>Rangos</span>
-                                </summary>
-                                <ul class="selectables">
-                                    <li><button>General</button></li>
-                                    <li><button>Productos</button></li>
-                                    <li><button>Financiero</button></li>
-                                </ul>
-                            </details>
-                        </li>
-                        <li class="selectables">
+                    <ul class="selectables">
+                        <li><button>General</button></li>
+                        <li><button>Productos</button></li>
+                        <li><button>Financiero</button></li>
+                        <li >
                             <button>Rangos personalizados</button>
                         </li>
                     </ul>
@@ -132,7 +123,17 @@
             </div>
         </div>
         <div class="section" id="sales">
-            <h2>Ventas</h2>
+            <div class="block center">
+                <h3>Cargar datos</h3>
+                <div class="upload">
+                    <input type="file" id="sales-file">
+                    <label for="sales-file" class="actionable">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-from-line-icon lucide-arrow-up-from-line"><path d="m18 9-6-6-6 6"/><path d="M12 3v14"/><path d="M5 21h14"/></svg>
+                    </label>
+                    <span id="file-name"></span>
+                    <button class="actionable">Subir archivo</button>    
+                </div>
+            </div>
         </div>
         <div class="section" id="inventory">
             <div class="block">

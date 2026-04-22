@@ -5,7 +5,7 @@
     border: none;
     list-style: none;
     box-sizing: border-box;
-    outline: 0px solid rgba(255, 0, 0, 0.267);
+    outline: 0px solid rgba(255, 0, 0, 0.267); /* for debugging */
 }
 
 body {
@@ -14,6 +14,10 @@ body {
     width: 100vw;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: aliceblue;
+}
+
+input[type="file"] {
+    display: none; 
 }
 
 ::-webkit-scrollbar {
@@ -93,4 +97,8 @@ button {
     border-radius: 10px;
     box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.5);
     padding: 10px;
+}
+
+.block.center {
+    text-align: center;
 }

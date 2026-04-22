@@ -1,4 +1,5 @@
-from app.models.auto_models import Restaurants, RawMaterial, Products, Recipes
+from app.models.restaurant import Restaurant
+from app.models.auto_models import RawMaterial, Products, Recipes
 from sqlalchemy.orm import Session
 
 from logs.loggers import start_logger
@@ -59,17 +60,17 @@ class Repository():
         logger.debug("Obtained all the recipes for the products inserted -> Products' amount: %s", len(product_names))
         return recipes
 
-    def _get_restaurants(self) -> tuple[bool, list]:
+    def _get_restaurants(self) -> list:
         '''
         Devuelve una lista de los IDs de los restaurantes registrados en la DB
         '''
-        restaurants_list = [r[0] for r in self.session.query(Restaurants.r_id).filter(Restaurants.r_id != -9999).all()]
-        if not restaurants_list:
-            logger.error("Couldn't find any records in the restaurants' table")
-            return False, []
+        restaurants_list = [r[0] for r in self.session.query(Restaurant.r_id).filter(Restaurant.r_id != -9999).all()]
+        #if not restaurants_list:
+        #    logger.error("Couldn't find any records in the restaurants' table")
+        #    return False, []
         
         logger.debug("Finded restaurants' list -> Records' amount: %s", len(restaurants_list))
-        return True, restaurants_list
+        return restaurants_list
 
     
 
