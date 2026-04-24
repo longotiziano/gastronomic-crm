@@ -102,3 +102,9 @@ button {
 .block.center {
     text-align: center;
 }
+
+.flex-column {
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+}

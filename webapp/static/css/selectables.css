@@ -1,6 +1,5 @@
 .nav-button {
     position: relative;
-    width: 100%s;
     height: 100%;
     padding: 0.8rem;
     margin: 0.8rem;
@@ -24,6 +23,7 @@
 }
 
 .upload {
+    position: relative;
     border-radius: 5px;
     border-bottom: 0px; /* prevents duplicated borders with actionables */
 }
@@ -33,6 +33,13 @@
     border-radius: 0px;
     border: 0px;
     border-bottom: 2px solid rgba(124, 124, 124, 0.123);
+}
+
+.upload div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .selectables:not(.section-ul) button:hover, .actionable:hover {

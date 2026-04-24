@@ -1,0 +1,6 @@
+.file-name {
+    white-space: nowrap;    /* no rompe en múltiples líneas */
+    overflow: hidden;       /* oculta lo que sobra */
+    text-overflow: ellipsis; /* agrega los "..." */
+    max-width: 100%;
+}
