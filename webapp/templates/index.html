@@ -61,16 +61,16 @@
                 <h2 class="title">Controladores</h2>
                 <div class="area-control">    
                     <h3 class="subtitle">Control de área</h3>
-                    <ul class="selectables">
+                    <ul data-name="graphtype" class="selectables">
                         <li>
                             <details>
                                 <summary>
                                     <span>Ventas</span>
                                 </summary>
                                 <ul>
-                                    <li><button>General</button></li>
-                                    <li><button>Productos</button></li>
-                                    <li><button>Financiero</button></li>
+                                    <li><button data-graphtype="general">General</button></li>
+                                    <li><button data-graphtype="products">Productos</button></li>
+                                    <li><button data-graphtype="finance">Financiero</button></li>
                                 </ul>
                             </details>
                         </li>
@@ -102,20 +102,21 @@
                 </div>
                 <div class="date-control">
                     <h3 class="subtitle">Control de fechas</h3>
-                    <ul class="selectables">
-                        <li><button>General</button></li>
-                        <li><button>Productos</button></li>
-                        <li><button>Financiero</button></li>
-                        <li >
-                            <button>Rangos personalizados</button>
+                    <ul data-name="graphdate" class="selectables">
+                        <li><button data-graphdate="daily">Diario</button></li>
+                        <li><button data-graphdate="weekly">Semanal</button></li>
+                        <li><button data-graphdate="monthly">Mensual</button></li>
+                        <li>
+                            <button data-graphdate="personalized">Rangos personalizados</button>
                         </li>
                     </ul>
                 </div>
                 <div class="sector-control">
                     <h3 class="subtitle">Control de sectores</h3>
-                    <ul class="selectables">
-                        <li><button>Barra</button></li>
-                        <li><button>Cocina</button></li>
+                    <ul data-name="graphsection" class="selectables">
+                        <li><button data-graphsection="general">General</button></li>
+                        <li><button data-graphsection="bar">Barra</button></li>
+                        <li><button data-graphsection="kitchen">Cocina</button></li>
                     </ul>
                 </div>
             </div>
@@ -139,6 +140,12 @@
                         <button class="actionable">Subir archivo</button>    
                     </div>
                 </div>
+                <div style="flex: 1" class="block">
+                    <h3>Cambios recientes</h3>
+                </div>
+            </div>
+            <div class="block">
+                 <div>Buscador</div>
             </div>
         </div>
         <div class="section" id="inventory">
