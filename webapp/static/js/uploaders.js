@@ -3,6 +3,8 @@ import { API_URL } from './config.js';
 /**
  * received the file's container, the upload's svg, the file's span, the introduced file's name and the input element toggles the file's visibility
  * 
+ * Also needs the submitBtn to deactivate the listener
+ * 
  * ### "show" parameter:
  * - if the "show" parameter is true, then it will show the file
  * - if false, will reset the upload button, including the input's value
@@ -10,8 +12,9 @@ import { API_URL } from './config.js';
  * @param {Element} uploader  
  * @param {string} fileName
  * @param {boolean} show
+ * @param {Element} submitBtn
  */
-export const showFile = (uploader, fileName, show) => {
+export const showFile = (uploader, fileName, show, submitBtn) => {
     const divFiles = uploader.querySelector(':scope > div');
     const fileContainer = divFiles.querySelector(':scope > div');
     const uploadSvg = divFiles.querySelector(':scope > svg');
@@ -28,6 +31,7 @@ export const showFile = (uploader, fileName, show) => {
         uploadSvg.style.visibility = 'visible';
         fileSpan.textContent = "";        
         input.value = "";
+        submitBtn.onclick = null;
     }
 };
 
@@ -77,7 +81,7 @@ export const sendEndpointFile = (submitBtn, file, endpoint, uploader) => {
             const data = await res.json();
             console.log('Upload successful:', data);
             alert('Upload complete!');
-            showFile(uploader, file.name, false);
+            showFile(uploader, file.name, false, submitBtn);
         } catch (error) {
             console.error('Upload failed:', error);
         } finally {
@@ -109,7 +113,7 @@ export const initUploaders = () => {
             sendEndpointFile(submitBtn, file, endpoint, uploader);
             cancelSvg.onclick = function (e) {
                 e.stopPropagation();
-                showFile(uploader, "", false);
+                showFile(uploader, "", false, submitBtn);
             }
             });
     });

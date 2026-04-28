@@ -12,7 +12,6 @@
     border-radius: 5px;
     text-align: left;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    cursor: pointer;
 }
 
 .actionable, .upload {
@@ -20,6 +19,7 @@
     margin: 0.6rem 0.1rem 0.6rem 0.1rem;
     text-align: center;
     border: 2px solid rgba(124, 124, 124, 0.123);
+    width: 100%;
 }
 
 .upload {
@@ -42,8 +42,9 @@
     gap: 0.5rem;
 }
 
-.selectables:not(.section-ul) button:hover, .actionable:hover {
+.selectables:not(.section-ul) button:hover, .actionable:hover, .x-btn:hover {
     background-color: rgba(124, 124, 124, 0.123);
+    cursor: pointer;
 }
 
 .selectables:not(.section-ul) button.active {
