@@ -1,9 +1,9 @@
-from app.models.restaurant import Restaurant
-from app.models.auto_models import RawMaterial, Products, Recipes
+from app.models.raw_material import RawMaterial
+from app.models.product import Product
+from app.models.recipe import Recipe
 from sqlalchemy.exc import SQLAlchemyError
-from sqlalchemy.orm import Session
 
-from app.logs.loggers import start_logger
+from app.logs.loggers import start_logger, raise_and_log
 logger = start_logger(__name__)
 
 class Repository():
@@ -19,6 +19,9 @@ class Repository():
     def __init__(self, session):
         self.session = session
     
+    def _count_records(self):
+        return self.session.query(self.model).count()
+
     def obtain_name_id_dict(self, r_id: int) -> tuple[bool, dict]:
         '''
         Función dinámica que retorna un diccionario {'name':id} para mejor inserción en los diferentes
@@ -40,7 +43,7 @@ class Repository():
         logger.debug("Dict created and returned -> r_id: %s | Records' amount: %s", r_id, len(dict_results))
         return True, dict_results
     
-    def _get_recipes_by_products(self, r_id: int, product_names: list, session: Session) -> list[tuple[str, str, float]]:
+    def _get_recipes_by_products(self, r_id: int, product_names: list) -> list[tuple[str, str, float]]:
         '''
         ### Receives:
         - r_id
@@ -49,35 +52,22 @@ class Repository():
         ### Returns:
         - List of tuples, each tuple represents a record of the recipe's filtered table
         '''
-        recipes = session.query(Products.product_name, RawMaterial.rm_name, Recipes.rm_amount)\
-            .join(RawMaterial, RawMaterial.rm_id == Recipes.rm_id)\
-            .join(Products, Products.product_id == Recipes.product_id)\
-            .filter(
-                Recipes.r_id == int(r_id),
-                Products.product_name.in_(product_names)
-            )\
-            .all()
+        try:
+            recipes = self.session.query(Product.product_name, RawMaterial.rm_name, Recipe.rm_amount)\
+                .join(RawMaterial, RawMaterial.rm_id == Recipe.rm_id)\
+                .join(Product, Product.product_id == Recipe.product_id)\
+                .filter(
+                    Recipe.r_id == int(r_id),
+                    Product.product_name.in_(product_names)
+                )\
+                .all()
+        except SQLAlchemyError as e:
+            raise_and_log("Unexpected server error while obtaining products' recipes", e, logger)
+        if not recipes:
+            raise_and_log(f"Couldn't find any recipes while looking for products that match '{product_names}'", ValueError(), logger)
             
         logger.debug("Obtained all the recipes for the products inserted -> Products' amount: %s", len(product_names))
         return recipes
-
-    def _get_restaurants(self) -> list:
-        '''
-        Devuelve una lista de los IDs de los restaurantes registrados en la DB
-        '''
-        try:
-            restaurants_list = [r[0] for r in self.session.query(Restaurant.r_id).filter(Restaurant.r_id != -9999).all()]
-        except SQLAlchemyError as e:
-            er = f"Unexpected error while finding the restaurants' records -> Error: {e}"
-            logger.error(er)
-            raise ValueError(er)
-        if not restaurants_list:
-            er = f"Couldn't find any restaurants' records"
-            logger.error(er)
-            raise ValueError(er)
-
-        logger.debug("Finded restaurants' list -> Records' amount: %s", len(restaurants_list))
-        return restaurants_list
 
     
 

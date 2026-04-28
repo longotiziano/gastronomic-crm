@@ -17,4 +17,4 @@ class Base(DeclarativeBase):
 AutoBase = automap_base()
 AutoBase.prepare(autoload_with=engine)
 
-SessionLocal = sessionmaker(bind=engine)
+Sess = sessionmaker(bind=engine)
