@@ -1,11 +1,11 @@
 from app.repositories.raw_material_repository import RawMaterialRepository
 
-from sql.database import SessionLocal
+from app.sql.database import SessionLocal
 from sqlalchemy.exc import SQLAlchemyError
 import pandas as pd
 from typing import Literal, Any
 
-from logs.loggers import start_logger
+from app.logs.loggers import start_logger
 logger = start_logger(__name__)
 
 def load_data_task(

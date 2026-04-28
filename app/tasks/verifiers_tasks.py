@@ -1,10 +1,10 @@
 from app.verifiers.base_verifier import Verifier
-from sql.database import SessionLocal
+from app.sql.database import SessionLocal
 
 import pandas as pd
 from typing import Literal, Optional, Any, Callable
 
-from logs.loggers import start_logger
+from app.logs.loggers import start_logger
 logger = start_logger(__name__)
 
 def verify_task(

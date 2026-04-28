@@ -12,7 +12,7 @@ __pycache__/
 *.sqlite3
 
 # Logs
-logs/logs.csv
+app/logs/logs.csv
 
 # VS Code
 .vscode/

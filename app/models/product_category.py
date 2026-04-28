@@ -1,5 +1,5 @@
 from app.models.product import Product
-from sql.database import Base 
+from app.sql.database import Base 
 
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import Integer, Text

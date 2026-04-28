@@ -1,7 +1,7 @@
 from app.models.raw_material import RawMaterial
 from app.models.restaurant import Restaurant
 from app.models.product import Product
-from sql.database import Base 
+from app.sql.database import Base 
 
 from typing import Optional
 from sqlalchemy.orm import Mapped, mapped_column, relationship

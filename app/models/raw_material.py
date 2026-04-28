@@ -3,7 +3,7 @@ from app.models.recipe import Recipe
 from app.models.restaurant import Restaurant
 from app.models.stock import Stock
 from app.models.stock_movement import StockMovement
-from sql.database import Base 
+from app.sql.database import Base 
 
 from typing import Optional
 from sqlalchemy.orm import Mapped, mapped_column, relationship

@@ -1,4 +1,4 @@
-from webapp.routes.sales import sales_bp
+from app.routes.sales import sales_bp
 
 from flask_cors import CORS
 from flask import Flask

@@ -2,7 +2,7 @@ from app.models.recipe import Recipe
 from app.models.restaurant import Restaurant
 from app.models.product_category import ProductCategory
 from app.models.sale import Sale
-from sql.database import Base 
+from app.sql.database import Base 
 
 
 from typing import Optional

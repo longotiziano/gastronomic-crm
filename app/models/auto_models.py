@@ -1,4 +1,4 @@
-from sql.database import AutoBase
+from app.sql.database import AutoBase
 
 Products_categories = AutoBase.classes.products_categories
 Products = AutoBase.classes.products

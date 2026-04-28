@@ -5,7 +5,7 @@ from sqlalchemy.orm import joinedload
 import pandas as pd
 from typing import Literal
     
-from logs.loggers import start_logger
+from app.logs.loggers import start_logger
 logger = start_logger(__name__)
 
 class RawMaterialRepository(Repository):
@@ -69,7 +69,7 @@ class RawMaterialRepository(Repository):
         except SQLAlchemyError as e:
             er = f"Unexpected error ocurred while finding stock's amounts -> Error: {e}"
             logger.error(er)
-            return False, er
+            raise ValueError(er)
 
         for stock in stocks:
             rm_name = stock.raw_material.rm_name

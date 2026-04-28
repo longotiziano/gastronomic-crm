@@ -1,7 +1,7 @@
 from app.repositories.raw_material_repository import RawMaterialRepository
 import pandas as pd
     
-from logs.loggers import start_logger
+from app.logs.loggers import start_logger
 logger = start_logger(__name__)
 
 class Verifier():

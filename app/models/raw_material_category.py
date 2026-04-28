@@ -1,5 +1,5 @@
 from app.models.raw_material import RawMaterial
-from sql.database import Base 
+from app.sql.database import Base 
 
 from typing import Optional
 from sqlalchemy.orm import Mapped, mapped_column, relationship

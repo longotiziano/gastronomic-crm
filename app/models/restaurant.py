@@ -4,7 +4,7 @@ from app.models.sale import Sale
 from app.models.stock import Stock
 from app.models.stock_movement import StockMovement
 from app.models.product import Product
-from sql.database import Base 
+from app.sql.database import Base 
 
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import Integer, Text

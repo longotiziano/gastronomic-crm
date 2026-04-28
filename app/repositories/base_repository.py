@@ -1,8 +1,9 @@
 from app.models.restaurant import Restaurant
 from app.models.auto_models import RawMaterial, Products, Recipes
+from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 
-from logs.loggers import start_logger
+from app.logs.loggers import start_logger
 logger = start_logger(__name__)
 
 class Repository():
@@ -64,11 +65,17 @@ class Repository():
         '''
         Devuelve una lista de los IDs de los restaurantes registrados en la DB
         '''
-        restaurants_list = [r[0] for r in self.session.query(Restaurant.r_id).filter(Restaurant.r_id != -9999).all()]
-        #if not restaurants_list:
-        #    logger.error("Couldn't find any records in the restaurants' table")
-        #    return False, []
-        
+        try:
+            restaurants_list = [r[0] for r in self.session.query(Restaurant.r_id).filter(Restaurant.r_id != -9999).all()]
+        except SQLAlchemyError as e:
+            er = f"Unexpected error while finding the restaurants' records -> Error: {e}"
+            logger.error(er)
+            raise ValueError(er)
+        if not restaurants_list:
+            er = f"Couldn't find any restaurants' records"
+            logger.error(er)
+            raise ValueError(er)
+
         logger.debug("Finded restaurants' list -> Records' amount: %s", len(restaurants_list))
         return restaurants_list
 
