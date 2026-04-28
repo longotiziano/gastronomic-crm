@@ -1,9 +1,12 @@
-from app.models.raw_material import RawMaterial
-from app.models.recipe import Recipe
-from app.models.sale import Sale
-from app.models.stock import Stock
-from app.models.stock_movement import StockMovement
-from app.models.product import Product
+from __future__ import annotations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:    
+    from app.models.raw_material import RawMaterial
+    from app.models.recipe import Recipe
+    from app.models.sale import Sale
+    from app.models.stock import Stock
+    from app.models.stock_movement import StockMovement
+    from app.models.product import Product
 from app.sql.database import Base 
 
 from sqlalchemy.orm import Mapped, mapped_column, relationship

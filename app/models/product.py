@@ -1,7 +1,10 @@
-from app.models.recipe import Recipe
-from app.models.restaurant import Restaurant
-from app.models.product_category import ProductCategory
-from app.models.sale import Sale
+from __future__ import annotations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:    
+    from app.models.recipe import Recipe
+    from app.models.restaurant import Restaurant
+    from app.models.product_category import ProductCategory
+    from app.models.sale import Sale
 from app.sql.database import Base 
 
 
@@ -27,3 +30,14 @@ class Product(Base):
 
     def __repr__(self):
         return f"<Product {self.product_id} - {self.product_name}>"
+    
+    def _to_dict(self) -> dict:
+        """
+        Returns the conventional dictionary that will use the frontend
+        """
+        return {
+            "product_name": self.product_name,
+            "product_category": self.category,
+            "price": self.price,
+            "recipes": self.recipes
+        }

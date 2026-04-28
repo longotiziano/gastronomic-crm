@@ -1,8 +1,11 @@
-from app.models.raw_material_category import RawMaterialCategory
-from app.models.recipe import Recipe
-from app.models.restaurant import Restaurant
-from app.models.stock import Stock
-from app.models.stock_movement import StockMovement
+from __future__ import annotations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:    
+    from app.models.raw_material_category import RawMaterialCategory
+    from app.models.recipe import Recipe
+    from app.models.restaurant import Restaurant
+    from app.models.stock import Stock
+    from app.models.stock_movement import StockMovement
 from app.sql.database import Base 
 
 from typing import Optional

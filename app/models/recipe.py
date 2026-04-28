@@ -1,6 +1,9 @@
-from app.models.raw_material import RawMaterial
-from app.models.restaurant import Restaurant
-from app.models.product import Product
+from __future__ import annotations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:    
+    from app.models.raw_material import RawMaterial
+    from app.models.restaurant import Restaurant
+    from app.models.product import Product
 from app.sql.database import Base 
 
 from typing import Optional

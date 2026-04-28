@@ -1,4 +1,7 @@
-from app.models.product import Product
+from __future__ import annotations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from app.models.product import Product
 from app.sql.database import Base 
 
 from sqlalchemy.orm import Mapped, mapped_column, relationship
