@@ -3,6 +3,9 @@
 .venv
 venv
 
+# Database
+db-sqlite.db
+
 # Python
 __pycache__/
 **/__pycache__/

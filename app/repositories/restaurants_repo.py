@@ -19,7 +19,6 @@ class RestaurantRepository(Repository):
                 [r[0] for r in self.session.query(Restaurant.r_id)\
                 .filter(Restaurant.r_id != -9999)\
                 .filter(Restaurant.restaurant.ilike(f"%{looked_name}%")).all()]
-
         except SQLAlchemyError as e:
             raise_and_log("Unexpected error while finding the restaurants' records", e, logger)
 

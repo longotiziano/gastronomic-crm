@@ -37,7 +37,7 @@ class Product(Base):
         """
         return {
             "product_name": self.product_name,
-            "product_category": self.category,
+            "product_category": self.category.category_name if self.category else None,
             "price": self.price,
-            "recipes": self.recipes
+            "recipes": None # for now
         }

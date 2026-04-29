@@ -2,10 +2,9 @@ import os
 from pathlib import Path
 import logging.config 
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-CSV_LOG_FILE = BASE_DIR / "logs" / "logs.csv"
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+CSV_LOG_FILE = BASE_DIR / "app" / "logs" / "logs.csv"
 
-# Creo el .csv en el cual se guardarán los logs
 if not os.path.exists(CSV_LOG_FILE):
     with open(CSV_LOG_FILE, "w", newline="") as f:
         f.write('"timestamp","logger","level","message"\n')
@@ -45,4 +44,5 @@ def setup_logging() -> None:
     """
     Sets up logger initial configuration
     """
+    logging.getLogger('werkzeug').setLevel(logging.ERROR)
     logging.config.dictConfig(LOGGING_CONFIG)

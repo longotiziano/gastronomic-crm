@@ -34,12 +34,7 @@ class ProductsRepository(Repository):
         - List with dictionaries of 
         """
         try: # Probability of polimorphism with raw material! # no problem with fstrings cause it's parametized instantly by SQLAlchemy
-            results: list[Product] = self.session.query(
-                            Product.product_name,
-                            Product.category,
-                            Product.price,
-                            Product.recipes
-                            )\
+            results: list[Product] = self.session.query(Product)\
                         .filter(Product.product_name.ilike(f"%{name_looked}%"))\
                         .filter(Product.r_id == r_id)\
                         .offset(actual_offset)\
