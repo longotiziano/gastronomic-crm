@@ -1,4 +1,5 @@
-import { API_URL } from './config.js';
+import { API_URL, DEFAULT_RESTAURANT } from './config.js';
+import { obtainRId } from './utils.js';
 
 /**
  * received the file's container, the upload's svg, the file's span, the introduced file's name and the input element toggles the file's visibility
@@ -65,7 +66,7 @@ export const receiveFile = (input, trigger, onFile) => {
  * @param {Element} uploader 
  */
 export const sendEndpointFile = (submitBtn, file, endpoint, uploader) => {
-    const rId = new URLSearchParams(window.location.search).get('restaurant');
+    const rId = obtainRId()
     // overwrite previous onclick to ensure only one file is sent per click
     submitBtn.onclick = async function() {
         const formData = new FormData();

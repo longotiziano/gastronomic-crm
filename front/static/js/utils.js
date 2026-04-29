@@ -1,3 +1,5 @@
+import { API_URL, DEFAULT_RESTAURANT } from "./config.js";
+
 /**
  * Receives:
  * - a NodeList
@@ -12,4 +14,13 @@ export const createIndexObject = (elements) => {
         indexObject[elem.id] = { index: i, element: elem };
     });
     return indexObject;
+}
+
+/**
+ * Returns the rId selected in the URL. If there isn't a value, provides the default one.
+ * @returns {Number}
+ */
+export const obtainRId = () => {
+    const rId = new URLSearchParams(window.location.search).get('restaurant') ?? DEFAULT_RESTAURANT;
+    return rId;
 }

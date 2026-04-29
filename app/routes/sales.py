@@ -49,12 +49,12 @@ def show_products():
             return error_response(str(e), "INTERNAL_SERVER_ERROR", 500)
         
         prod_repo = ProductsRepository(sess)
-        try:
+        try: 
             results = prod_repo.get_products(r_id, offset, page_size, looked_name)
             total_results = prod_repo._count_records(looked_name)
         except Exception as e:
             return error_response(str(e), "INTERNAL_SERVER_ERROR", 500)
         
     prev, next, pages = calculate_pagination(offset, total_results, page_size)
-    return pagination_response({"products":results}, prev, next, pages)
+    return pagination_response({"products": results}, prev, next, pages)
         

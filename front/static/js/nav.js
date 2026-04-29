@@ -14,7 +14,7 @@ export const showSection = (sections, name) => {
     const newIndex = sections[name].index;
 
     Object.values(sections).forEach(({ index, element }) => {
-        console.log("Removing the classes for the following element -> ", element)
+        // console.log("Removing the classes for the following element -> ", element)
         element.classList.remove('active', 'left');
         if (index < newIndex) element.classList.add('left');
     });
