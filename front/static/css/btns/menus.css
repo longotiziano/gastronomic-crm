@@ -22,3 +22,9 @@ Those are divs that contains two brother elements:
     top: 100%;
     left: 0;
 }
+
+.selectables.menu-button button {
+    margin: 0.1rem;
+    font-size: 1rem;
+    font-weight: 500;
+}

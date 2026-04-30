@@ -1,5 +1,7 @@
-import { API_URL, DEFAULT_RESTAURANT } from '../config.js';
-import { obtainRId } from '../general/utils.js';
+import configData from '../../../../config.json' with { type: 'json' };
+import { obtainRId } from '../utils.js';
+const DEFAULT_RESTAURANT = configData.default_values.default_restaurant;
+const API_URL = configData.api_url;
 
 /**
  * received the file's container, the upload's svg, the file's span, the introduced file's name and the input element toggles the file's visibility

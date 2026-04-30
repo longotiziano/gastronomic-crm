@@ -1,5 +1,5 @@
 import { createIndexObject } from './utils.js';
-import { selectOption } from '../btns/selectables.js';
+import { selectOption } from './btns/selectables.js';
 
 /**
  * Receives:

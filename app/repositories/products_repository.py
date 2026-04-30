@@ -43,5 +43,6 @@ class ProductsRepository(Repository):
         except SQLAlchemyError as e:
             raise_and_log("Unexpected server error during the products' records extraction", e, logger)
         if not results:
-            raise_and_log(f"Couldn't find any results while looking for products that match '{name_looked}'", ValueError(), logger)
+            logger.warning("Couldn't find any results while looking for products that match '%s'", name_looked)
+            return [{}]
         return [prod._to_dict() for prod in results]

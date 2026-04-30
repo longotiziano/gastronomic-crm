@@ -1,4 +1,6 @@
-import { API_URL, DEFAULT_RESTAURANT } from "./config.js";
+import configData from '../../../config.json' with { type: 'json' };
+const DEFAULT_RESTAURANT = configData.default_values.default_restaurant;
+const API_URL = configData.api_url;
 
 /**
  * Receives:

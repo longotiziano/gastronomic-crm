@@ -1,7 +1,7 @@
 import { initDisplayMenus, initSections } from './nav.js';
-import { initSelectables } from './selectables.js';
-import { initUploaders } from './uploaders.js';
-import { loadProducts } from './tables.js'
+import { initSelectables } from './btns/selectables.js';
+import { initUploaders } from './btns/uploaders.js';
+import { loadProducts } from './tables/tables.js'
 
 initSelectables();
 initDisplayMenus();

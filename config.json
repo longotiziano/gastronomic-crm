@@ -1,0 +1,12 @@
+{
+    "models": {
+        "products": {
+            "cols": [],
+            "cols_displayed": ["product_name", "product_category", "price"]
+        }
+    },
+    "default_values": {
+        "default_restaurant": "club_serrano"
+    },
+    "api_url": "http://127.0.0.1:5000"
+}

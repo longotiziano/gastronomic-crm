@@ -35,3 +35,5 @@ I designed a upload button that have this structure:
 </div>
 ```
 The only thing that you should change is the `data-uploaderid` attribute depending on the input's id.
+
+## Menus

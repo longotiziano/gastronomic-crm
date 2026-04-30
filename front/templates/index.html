@@ -6,13 +6,16 @@
 
     <title>Gestión de Stock</title>
     
+    <!-- First link the generals -->
     <link rel="stylesheet" href="../static/css/general/body.css">
     <link rel="stylesheet" href="../static/css/general/nav.css">
+    <link rel="stylesheet" href="../static/css/btns/general.css">
     <link rel="stylesheet" href="../static/css/sections/reports.css">
     <link rel="stylesheet" href="../static/css/sections/inventory.css">
     <link rel="stylesheet" href="../static/css/btns/selectables.css">
     <link rel="stylesheet" href="../static/css/btns/menus.css">
     <link rel="stylesheet" href="../static/css/btns/uploaders.css">
+    <link rel="stylesheet" href="../static/css/btns/searcher.css">
     
     <link rel="icon" href="../static/img/icon-club-serrano.jpg" type="image/jpg"/>
 
@@ -150,9 +153,11 @@
                     <h3>Cambios recientes</h3>
                 </div>
             </div>
-            <div style="flex: 10" class="block">
-                 <div id="container"></div>
+            <div style="flex: 10" class="block flex-column">
+                <input type="text" class="searcher" placeholder="Buscar producto...">
+                <div class="table" data-tablemodel="products" data-endpoint="/sales/show_products"></div>
             </div>
+            <div style="flex: 2" class="block flex-column"></div>
         </div>
         <div class="section" id="inventory">
         </div>

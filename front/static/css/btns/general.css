@@ -1,0 +1,28 @@
+.selectables button, .actionable, .searcher {
+    margin: 0.1rem 0.1rem 0.1rem 0.1rem;
+    width: 100%;
+    padding: 0.3rem; 
+    border-radius: 5px;
+    text-align: left;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.actionable, .upload {
+    display: inline-block;
+    margin: 0.6rem 0.1rem 0.6rem 0.1rem;
+    text-align: center;
+    border: 2px solid rgba(124, 124, 124, 0.123);
+    width: 100%;
+}
+
+.selectables:not(.section-ul) button:hover, .actionable:hover, .x-btn:hover {
+    background-color: rgba(124, 124, 124, 0.123);
+    cursor: pointer;
+}
+
+.nav-button {
+    position: relative;
+    height: 100%;
+    padding: 0.8rem;
+    margin: 0.8rem;
+}
