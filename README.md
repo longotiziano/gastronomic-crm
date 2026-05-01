@@ -30,5 +30,20 @@ Manage your employees to avoid data messes and disorganization.
 - Manage their payments
 - Organize employee's information
 
+## Technologies Involved
+- **Python**: Backend, integrated with Flask
+- **SQLite**: For a simple database, with SQLAlchemy
+- **HTML, CSS & JavaScript**: Frontend
 
-
+## Project's Structure
+```
+gastronomic-erp/
+|-app/ -> Backend
+|-docs/ -> Documentation
+|-front/ -> Frontend
+|-.gitignore
+|-README.md -> This file
+|-api_app.py -> APIs initializer
+|-config.json -> Configurations' file
+|-requirements.txt -> Libraries used in the project
+```
