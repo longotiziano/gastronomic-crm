@@ -20,7 +20,7 @@ This allows the functions to be reutilized in JavaScript.
 ## Actionables
 
 ## Uploaders
-I designed a upload button that have this structure:
+I designed a upload button with this structure:
 ```html
 <div class="upload" data-uploaderid="<id_example>">
     <input type="file" id="<id_example>">
