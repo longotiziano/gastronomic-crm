@@ -7,6 +7,9 @@ from flask import Blueprint, jsonify, request
 from werkzeug.datastructures import FileStorage
 from typing import Optional
 
+from app.logs.loggers import start_logger
+logger = start_logger(__name__)
+
 sales_bp = Blueprint('sales', __name__, url_prefix='/sales')
 
 @sales_bp.route('/upload', methods=['POST'])
@@ -23,7 +26,7 @@ def submit_sales_file():
     if not file or not r_id:
         return jsonify({"maaaal": False})
     
-    print(f"Recibido archivo: {file.filename}")
+    logger.info("Succesfully created the response -> URL: %s", str(request.url))
     return jsonify({"success": True})
 
 @sales_bp.route('/show_products', methods=['GET'])
@@ -33,7 +36,7 @@ def show_products():
     ### Receives:
     - File
     ### Returns
-    """     
+    """
     resto = request.args.get("restaurant", type=str)
     offset = request.args.get("offset", type=int, default=0)
     page_size = request.args.get("limit", type=int, default=10)
@@ -56,5 +59,7 @@ def show_products():
             return error_response(str(e), "INTERNAL_SERVER_ERROR", 500)
         
     prev, next, pages = calculate_pagination(offset, total_results, page_size)
-    return pagination_response({"products": results}, prev, next, pages)
+    response = pagination_response({"products": results}, prev, next, pages)
+    logger.info("Succesfully created the response -> URL: %s", str(request.url))
+    return response
         
