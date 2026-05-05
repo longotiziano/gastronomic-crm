@@ -32,7 +32,7 @@ def submit_sales_file():
 @sales_bp.route('/show_products', methods=['GET'])
 def show_products():
     """
-    Shows the 
+    Shows the products for a given restaurant
     ### Receives:
     - File
     ### Returns
@@ -47,7 +47,8 @@ def show_products():
     with Sess() as sess:
         res_repo = RestaurantRepository(sess)
         try:
-            r_id = res_repo._get_restaurants(resto)[0]
+            resto = res_repo._get_restaurants(resto)[0]
+            r_id = resto.r_id
         except Exception as e:
             return error_response(str(e), "INTERNAL_SERVER_ERROR", 500)
         

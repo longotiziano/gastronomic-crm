@@ -31,3 +31,12 @@ def error_response(msg: str, error_type: str, code: int) -> tuple[Response, int]
         'msg': msg,
         'error_type': error_type
     }), code
+
+def success_response(msg: str, data: dict, url: str, code: int) -> tuple[Response, int]:
+    return jsonify({
+        'msg': msg,
+        'data': data,
+        'meta': {
+            'url': url
+        }
+    }), code

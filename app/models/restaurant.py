@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:    
     from app.models.raw_material import RawMaterial
@@ -7,6 +8,7 @@ if TYPE_CHECKING:
     from app.models.stock import Stock
     from app.models.stock_movement import StockMovement
     from app.models.product import Product
+
 from app.sql.database import Base 
 
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -18,6 +20,7 @@ class Restaurant(Base):
 
     r_id: Mapped[int] = mapped_column(Integer, primary_key=True)
     restaurant: Mapped[Optional[str]] = mapped_column(Text)
+    image_url: Mapped[str] = mapped_column(Text)
 
     # relaciones
     products: Mapped[list["Product"]] = relationship(back_populates="restaurant")
@@ -32,7 +35,16 @@ class Restaurant(Base):
         Modifies the way the class is printed in console
         """
         return f"<Restaurant {self.r_id} - {self.restaurant}>"
-
+    
+    def _to_dict(self) -> dict:
+        """
+        Returns the conventional dictionary that will use the frontend
+        """
+        return {
+            "r_id": self.r_id,
+            "restaurant": self.restaurant,
+            "image_url": self.image_url
+        }
 
 
 

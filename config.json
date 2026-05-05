@@ -3,6 +3,11 @@
         "products": {
             "cols": [],
             "cols_displayed": ["product_name", "product_category", "price"]
+        },
+        "restaurants": {
+            "cols": [],
+            "cols_displayed": ["restaurant"],
+            "cols_required": ["restaurant"]
         }
     },
     "default_values": {
