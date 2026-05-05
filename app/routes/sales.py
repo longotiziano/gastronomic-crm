@@ -39,7 +39,7 @@ def show_products():
     """
     resto = request.args.get("restaurant", type=str)
     offset = request.args.get("offset", type=int, default=0)
-    page_size = request.args.get("limit", type=int, default=10)
+    page_size = request.args.get("limit", type=int, default=13)
     looked_name = request.args.get("looked_name", type=str, default="")
     if not resto:
         return error_response("Couldn't find any selected restaurant. Please, choose a restaurant to continue.", "MISSING_PARAMETERS", 400)

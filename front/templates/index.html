@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="../static/css/btns/menus.css">
     <link rel="stylesheet" href="../static/css/btns/uploaders.css">
     <link rel="stylesheet" href="../static/css/btns/searcher.css">
+    <link rel="stylesheet" href="../static/css/general/tables.css">
     
     <link rel="icon" href="../static/img/icon-club-serrano.jpg" type="image/jpg"/>
 
@@ -154,8 +155,13 @@
                 </div>
             </div>
             <div style="flex: 10" class="block flex-column">
-                <input type="text" class="searcher" placeholder="Buscar producto...">
+                <div class="searcher">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+                    <input type="text" placeholder="Buscar producto...">
+                </div>
                 <div class="table-container" data-tablemodel="products" data-endpoint="/sales/show_products"></div>
+                <div>
+                </div>
             </div>
             <div style="flex: 2" class="block flex-column"></div>
         </div>

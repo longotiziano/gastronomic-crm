@@ -9,9 +9,10 @@
     position: relative;
     border-radius: 5px;
     border-bottom: 0px; /* prevents duplicated borders with actionables */
+    margin: 0.6rem 0.1rem 0.6rem 0.1rem;
 }
 
-.upload > .actionable {
+.upload > .actionable, .table-container tr {
     margin: 0px;
     border-radius: 0px;
     border: 0px;

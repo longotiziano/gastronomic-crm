@@ -78,7 +78,7 @@ export const initTables = () => {
     const tables = document.querySelectorAll('.table-container');
     tables.forEach(table => {
         if (debug) console.log(`Initializing table -> Table: ${table.outerHTML}`);
-        const searcher = table.parentElement.querySelector('.searcher');
+        const searcher = table.parentElement.querySelector('.searcher > input');
         if (debug) console.log(searcher.outerHTML);
         const tableModel = table.dataset.tablemodel;
         const cols = configData.models[tableModel].cols_displayed;
