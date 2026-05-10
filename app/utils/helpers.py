@@ -16,26 +16,29 @@ def calculate_pagination(actual_offset: int, total_records: int, page_size: int)
     next_page = total_records if actual_offset + page_size >= total_records else actual_offset + page_size
     return prev_page, next_page, num_pages
 
-def pagination_response(data: dict, prev_offset: int, next_offset: int, total_pages: int) -> tuple[Response, int]:
-    return jsonify({
-        "data": data,
-        "pagination": {
-            "prev_offset": prev_offset,
-            "next_offset": next_offset,
-            "total_pages": total_pages
-            }
-    }), 200
-
 def error_response(msg: str, error_type: str, code: int) -> tuple[Response, int]:
     return jsonify({
         'msg': msg,
         'error_type': error_type
     }), code
 
-def success_response(msg: str, data: dict, url: str, code: int) -> tuple[Response, int]:
+def success_response(
+        msg: str, 
+        data: dict, 
+        url: str, 
+        code: int,
+        prev_offset: int = 0, 
+        next_offset: int = 0, 
+        total_pages: int = 0
+    ) -> tuple[Response, int]:
     return jsonify({
         'msg': msg,
         'data': data,
+        "pagination": {
+            "prev_offset": prev_offset,
+            "next_offset": next_offset,
+            "total_pages": total_pages
+            },
         'meta': {
             'url': url
         }

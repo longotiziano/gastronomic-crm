@@ -1,7 +1,7 @@
 from app.repositories.products_repository import ProductsRepository
 from app.repositories.restaurants_repo import RestaurantRepository
 from app.sql.database import Sess
-from app.utils.helpers import error_response, pagination_response, calculate_pagination
+from app.utils.helpers import error_response, success_response, calculate_pagination
 
 from flask import Blueprint, jsonify, request
 from werkzeug.datastructures import FileStorage
@@ -60,7 +60,7 @@ def show_products():
             return error_response(str(e), "INTERNAL_SERVER_ERROR", 500)
         
     prev, next, pages = calculate_pagination(offset, total_results, page_size)
-    response = pagination_response({"products": results}, prev, next, pages)
+    response = success_response("Products retrieved successfully.", {"products": results}, str(request.url), 200, prev, next, pages)
     logger.info("Succesfully created the response -> URL: %s", str(request.url))
     return response
         

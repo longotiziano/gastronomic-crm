@@ -1,7 +1,7 @@
 from app.models.restaurant import Restaurant
 from app.repositories.restaurants_repo import RestaurantRepository
 from app.sql.database import Sess
-from app.utils.helpers import error_response, pagination_response, calculate_pagination, success_response
+from app.utils.helpers import error_response, calculate_pagination, success_response
 
 from flask import Blueprint, jsonify, request
 

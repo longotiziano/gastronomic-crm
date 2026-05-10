@@ -1,30 +1,9 @@
 import configData from '../../../../config.json' with { type: 'json' };
-import { obtainRId } from "../utils.js";
+import { obtainRId, loadTableData } from "../utils.js";
 import { tableSearcher } from "../btns/searcher.js";
+import { apiFetch } from "../utils.js";
 
-const API_URL = configData.api_url;
 const debug = configData.debug_mode;
-
-/**
- * received the table's container, the offset and the looked name, returns it's endpoint' data
- * 
- * @param {Element} tableContainer
- * @param {Number} offset
- * @param {string} lookedName
- * @returns {Array}
- */
-const loadTableData = async (tableContainer, offset, lookedName) => {
-    const rId = obtainRId();
-    const endpoint = `${API_URL}${tableContainer.dataset.endpoint}`;
-    const tableModel = tableContainer.dataset.tablemodel;
-
-    const res = await fetch(`${endpoint}?offset=${offset}&looked_name=${lookedName}&restaurant=${rId}`);
-    const data = await res.json();
-
-    const dataArray = data.data[tableModel];
-    if (debug) dataArray.map(obj => console.log(obj));
-    return dataArray;
-}
 
 /**
  * received the table's container, it's data and it's columns, creates the HTML of the table
@@ -53,19 +32,6 @@ const renderTable = (tableContainer, data, cols) => {
 };
 
 /**
- * combines loadTableData() and renderTable()
- * 
- * @param {Element} tableContainer
- * @param {Number} offset
- * @param {string} lookedName
- * @param {Array} cols
- */
-const createTable = async (tableContainer, offset, lookedName, cols) => {
-    const tableData = await loadTableData(tableContainer, offset, lookedName);
-    renderTable(tableContainer, tableData, cols)
-}
-
-/**
  * 
  * 
  * @returns {string}
@@ -84,9 +50,9 @@ export const initTables = () => {
         const cols = configData.models[tableModel].cols_displayed;
         console.log(`Columns finded -> Columns: ${cols} | Function: ${initTables.name}`);
         // creates the table for the first time
-        createTable(table, 0, "", cols);
+        loadTableData(table, 0, "", true, (container, data) => renderTable(container, data, cols));
         tableSearcher(searcher, (lookedName) => {
-            createTable(table, 0, lookedName, cols);
+            loadTableData(table, 0, lookedName, true, (container, data) => renderTable(container, data, cols));
         });
     });
 };

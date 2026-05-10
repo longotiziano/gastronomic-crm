@@ -1,3 +1,7 @@
+import configData from '../../../../config.json' with { type: 'json' };
+
+const debug = configData.debug_mode;
+
 /**
  * disables all buttons and selects the clicked one 
  * 
@@ -8,7 +12,7 @@
 export const selectOption = (clickedBtn, allBtns) => {
     allBtns.forEach(btn => {btn.classList.remove('active')});
     clickedBtn.classList.add('active');
-    console.log(`Selected button: ${clickedBtn.textContent}`)
+    if (debug) console.log(`Selected button: ${clickedBtn.textContent}`)
 };
 
 /**
@@ -20,17 +24,19 @@ export const initSelectables = () => {
     const selectables = document.querySelectorAll(".selectables");
     selectables.forEach(container => {
         const dataParam = container.dataset.name;
-        console.log(`Obtained container's data name: ${dataParam}`)
-        const btns = container.querySelectorAll("button")
-        btns.forEach(btn => {
-            btn.addEventListener("click", () => {
-                selectOption(btn, btns);
-                const url = new URL(window.location.href);
-                const btnData = btn.dataset[dataParam];
-                console.log(`Displaying selectable's value: ${btnData}`);
-                url.searchParams.set(dataParam, btnData);
-                window.history.pushState({}, '', url.toString());   
-            })
+        if (debug) console.log(`Obtained container's data name: ${dataParam}`);
+
+        container.addEventListener("click", (e) => {
+            const btn = e.target.closest("button")
+            if (!btn) return  // si el click no vino de un button, ignorar
+
+            const btns = container.querySelectorAll("button")
+            selectOption(btn, btns);
+            const url = new URL(window.location.href);
+            const btnData = btn.dataset[dataParam];
+            if (debug) console.log(`Displaying selectable's value: ${btnData}`);
+            url.searchParams.set(dataParam, btnData);
+            window.history.pushState({}, '', url.toString());
         })
     })
 };
