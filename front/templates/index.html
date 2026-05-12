@@ -7,9 +7,14 @@
     <title>Gestión de Stock</title>
     
     <!-- First link the generals -->
+    <link rel="stylesheet" href="../static/css/general/keyframes.css">
     <link rel="stylesheet" href="../static/css/general/body.css">
+    <link rel="stylesheet" href="../static/css/general/blocks.css">
     <link rel="stylesheet" href="../static/css/general/nav.css">
     <link rel="stylesheet" href="../static/css/btns/general.css">
+    <link rel="stylesheet" href="../static/css/general/modals.css">
+    <link rel="stylesheet" href="../static/css/general/forms.css">
+
     <link rel="stylesheet" href="../static/css/sections/reports.css">
     <link rel="stylesheet" href="../static/css/sections/inventory.css">
     <link rel="stylesheet" href="../static/css/btns/selectables.css">
@@ -35,7 +40,7 @@
                         <li><button data-restaurant="club_serrano" class="active">Club Serrano</button></li>
                         <li><button data-restaurant="kubo">Kubo</button></li>
                     </ul>
-                    <button class="actionable">+ Agregar restaurante...</button>
+                    <button class="actionable" id="add-restaurant">+ Agregar restaurante...</button>
                 </div>
             </div>
             <ul data-name="section" class="selectables section-ul">
@@ -63,7 +68,9 @@
     <main>
         <div class="section active" id="reports">
             <div class="block graphs-sidebar">
-                <h2 class="title">Controladores</h2>
+                <div class="block-header">
+                    <h2 class="title">Controladores</h2>
+                </div>
                 <div class="area-control">    
                     <h3 class="subtitle">Control de área</h3>
                     <ul data-name="graphtype" class="selectables">
@@ -126,7 +133,9 @@
                 </div>
             </div>
             <div class="block graphs">
-                <h2 class="title">Acá irían los gráficos</h2>
+                <div class="block-header">
+                    <h2 class="title">Acá irían los gráficos</h2>
+                </div>
             </div>
         </div>
         <div class="section" id="sales">
@@ -167,7 +176,7 @@
             <div style="flex: 2" class="block flex-column"></div>
         </div>
         <div class="section" id="inventory">
-        </div>
+
         </div>
         <div class="section" id="employees">
             <h2>Empleados</h2>
@@ -176,5 +185,41 @@
             <h2>Datos</h2>
         </div>
     </main>
+    <!-- Modal para crear restaurante -->
+    <div class="modal-overlay">
+        <div class="block modal" data-openby="add-restaurant">
+            <div class="block-header">
+                <h2>Crear nuevo restaurante</h2>
+                <svg class="x-btn" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </div>
+            <div class="block-content">
+                <form class="flex-column" id="restaurantForm" data-endpoint="/restaurants/creation">
+                    <div class="form-group">
+                        <label for="restaurantName">Nombre del restaurante *</label>
+                        <input type="text" id="restaurantName" name="name" required>
+                    </div>  
+                    <div class="form-group">
+                        <label for="restaurant-image">Seleccionar logo</label>
+                        
+                        <div class="upload" data-uploaderid="restaurant-image" >
+                            <input type="file" id="restaurant-image" name="address" accept="image/*">
+                            <div class="actionable">
+                                <div style="visibility: hidden; width: 100%;">    
+                                    <span class="file-name">Archivo seleccionado</span>
+                                    <svg class="x-btn" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                                </div>
+                                <svg style="visibility: visible; position: absolute;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-from-line-icon lucide-arrow-up-from-line"><path d="m18 9-6-6-6 6"/><path d="M12 3v14"/><path d="M5 21h14"/></svg>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="block-footer">
+                <button type="button" class="btn-cancel" id="cancelRestaurantModal">Cancelar</button>
+                <button type="submit" class="btn-submit" form="restaurantForm">Crear restaurante</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

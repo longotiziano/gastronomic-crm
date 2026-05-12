@@ -34,7 +34,9 @@ export const showFile = (uploader, fileName, show, submitBtn) => {
         uploadSvg.style.visibility = 'visible';
         fileSpan.textContent = "";        
         input.value = "";
-        submitBtn.onclick = null;
+        if (submitBtn) {
+            submitBtn.onclick = null;
+        }
     }
 };
 
@@ -110,7 +112,10 @@ export const initUploaders = () => {
 
         receiveFile(input, trigger, (file) => {
             showFile(uploader, file.name, true);
-            sendEndpointFile(submitBtn, file, uploader.dataset.endpoint, uploader);
+            // this validation is for the forms that have the upload button as submit, so it only sends the file when the button is clicked, not when it's shown
+            if (submitBtn) {
+                sendEndpointFile(submitBtn, file, uploader.dataset.endpoint, uploader);
+            }
             cancelSvg.onclick = function (e) {
                 e.stopPropagation();
                 showFile(uploader, "", false, submitBtn);

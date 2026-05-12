@@ -31,9 +31,15 @@ I designed a upload button with this structure:
         </div>
         <svg style="visibility: visible; position: absolute;">...</svg>
     </div>
+    <!-- OPTIONAL -->
     <button class="actionable">Subir archivo</button>    
 </div>
 ```
 The only thing that you should change is the `data-uploaderid` attribute depending on the input's id.
+
+I agregated verifications in the JS -> If there is an "upload" button for the file, then it does it's thing, but if it doesn't (like is the case for the forms that I also use this upload button) just ignores it.
+
+### Upload button
+Manages the request to the API, clears the previous `dataForm` and also changes the button's style to default.
 
 ## Menus
