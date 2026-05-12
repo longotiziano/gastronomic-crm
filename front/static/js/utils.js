@@ -39,17 +39,23 @@ export const obtainRId = () => {
  */
 export const apiFetch = async (endpoint, options = {}) => {
     const url = `${API_URL}${endpoint}`;
+    const { body, ...restOptions } = options;
+
+    const isFormData = body instanceof FormData;
+
     const res = await fetch(url, {
-        headers: { "Content-Type": "application/json" },
-        ...options // spread the options to allow for method, body, etc. to be passed in when calling the function
-    })
+        // Si es FormData no seteamos Content-Type, el browser lo hace solo
+        headers: isFormData ? {} : { "Content-Type": "application/json" },
+        ...restOptions,
+        body: isFormData ? body : body ? JSON.stringify(body) : undefined
+    });
 
     if (!res.ok) {
-        const error = await res.json()
-        throw new Error(error.message || `Error ${res.status}`)
+        const error = await res.json();
+        throw new Error(error.message || `Error ${res.status}`);
     }
 
-    return res.json()
+    return res.json();
 }
 
 /**

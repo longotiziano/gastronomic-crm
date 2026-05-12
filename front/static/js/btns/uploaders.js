@@ -1,7 +1,7 @@
 import configData from '../../../../config.json' with { type: 'json' };
-import { obtainRId } from '../utils.js';
+import { obtainRId, apiFetch } from '../utils.js';
+
 const DEFAULT_RESTAURANT = configData.default_values.default_restaurant;
-const API_URL = configData.api_url;
 
 /**
  * received the file's container, the upload's svg, the file's span, the introduced file's name and the input element toggles the file's visibility
@@ -76,12 +76,10 @@ export const sendEndpointFile = (submitBtn, file, endpoint, uploader) => {
         formData.append('r_id', rId);
         try {
             submitBtn.disabled = true; // Visual feedback
-            const res = await fetch(endpoint, {
+            const data = await apiFetch(endpoint, {
                 method: 'POST',
                 body: formData
             });
-            if (!res.ok) throw new Error(`Server error: ${res.status}`);
-            const data = await res.json();
             console.log('Upload successful:', data);
             alert('Upload complete!');
             showFile(uploader, file.name, false, submitBtn);
@@ -112,8 +110,7 @@ export const initUploaders = () => {
 
         receiveFile(input, trigger, (file) => {
             showFile(uploader, file.name, true);
-            const endpoint = `${API_URL}${uploader.dataset.endpoint}`;
-            sendEndpointFile(submitBtn, file, endpoint, uploader);
+            sendEndpointFile(submitBtn, file, uploader.dataset.endpoint, uploader);
             cancelSvg.onclick = function (e) {
                 e.stopPropagation();
                 showFile(uploader, "", false, submitBtn);
