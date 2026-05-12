@@ -32,6 +32,10 @@
     padding: 0;
 }
 
+.form-group .upload .actionable {
+    padding: 0.5rem;
+}
+
 .form-group textarea {
     resize: vertical;
     min-height: 80px;
