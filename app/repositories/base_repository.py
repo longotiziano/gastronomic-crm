@@ -19,9 +19,48 @@ class Repository():
     def __init__(self, session):
         self.session = session
     
-    def _count_records(self):
-        return self.session.query(self.model).count()
+    def _count_records(self, name_looked: str = "") -> int:
+        """
+        ### Receives:
+        - A name
+        ### Returns:
+        - The amounts of records that match the received name
+        """
+        try:
+            records = self.session.query(model).filter(model.name.ilike(f"%{name_looked}%")).count()
+        except SQLAlchemyError as e:
+            raise_and_log("Unexpected server error during the products' records extraction", e, logger)
+        return records
 
+    def _get_records(
+        self, 
+        r_id: int, 
+        actual_offset: int = 0, 
+        page_size: int = 10, 
+        name_looked: str = ""
+    ) -> list[model]:
+        """
+        Returns a list of tuples based on an offset and page size.
+        ### Receives:
+        - Offset
+        - Name looked
+        ### Returns:
+        - List of objects of the selected model
+        """
+        try:
+            results: list[model] = self.session.query(model)\
+                        .filter(model.name.ilike(f"%{name_looked}%"))\
+                        .filter(model.r_id == r_id)\
+                        .offset(actual_offset)\
+                        .limit(page_size)\
+                        .all()
+        except SQLAlchemyError as e:
+            raise_and_log("Unexpected server error during the records extraction", e, logger)
+        if not results:
+            logger.warning("Couldn't find any results while looking for records that match '%s'", name_looked)
+            return [{}]
+        return results
+    
     def obtain_name_id_dict(self, r_id: int) -> tuple[bool, dict]:
         '''
         Función dinámica que retorna un diccionario {'name':id} para mejor inserción en los diferentes
@@ -48,7 +87,6 @@ class Repository():
         ### Receives:
         - r_id
         - A list of products
-        - The SQL session
         ### Returns:
         - List of tuples, each tuple represents a record of the recipe's filtered table
         '''
