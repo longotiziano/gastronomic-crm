@@ -37,7 +37,7 @@ def show_products():
     - File
     ### Returns
     """
-    resto = request.args.get("restaurant", type=str)
+    resto = request.args.get("r_id", type=str)
     offset = request.args.get("offset", type=int, default=0)
     page_size = request.args.get("limit", type=int, default=13)
     looked_name = request.args.get("looked_name", type=str, default="")

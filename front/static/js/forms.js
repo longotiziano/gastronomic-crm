@@ -5,8 +5,19 @@ export const initForms = () => {
     const forms = document.querySelectorAll('form[data-endpoint]');
     forms.forEach(form => {
         const endpoint = form.dataset.endpoint;
-        const formId = form.id;
-        // look for a button with type submit and form attribute equal to the form id
-        const submitBtn = document.querySelector('button[type="submit"][form="' + formId + '"]');
-    })
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            try {
+                const formData = new FormData(form);
+                const data = await apiFetch(endpoint, {
+                    method: 'POST',
+                    body: formData
+                });
+                console.log('Success:', data);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+    });
 }

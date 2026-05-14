@@ -43,3 +43,17 @@ def success_response(
             'url': url
         }
     }), code
+
+def upload_image(file) -> str:
+    """
+    Uploads the image to the server and returns the URL
+    ### Receives:
+    - File
+    ### Returns:
+    - URL of the uploaded image
+    """
+    # Aquí iría la lógica para subir la imagen a un servicio de almacenamiento (como AWS S3, Google Cloud Storage, etc.)
+    # y luego devolver la URL de la imagen subida.
+    # Por simplicidad, vamos a simular esto devolviendo una URL ficticia.
+    return f"https://example.com/images/{file.filename}"
+

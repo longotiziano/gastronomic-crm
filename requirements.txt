@@ -3,3 +3,5 @@ sqlalchemy
 numpy
 flask
 flask-cors
+cloudinary
+python-dotenv

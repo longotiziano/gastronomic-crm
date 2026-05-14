@@ -1,4 +1,4 @@
-import configData from '../../../../config.json' with { type: 'json' };
+import configData from '../../../../config/config.json' with { type: 'json' };
 import { apiFetch, loadTableData } from "../utils.js";
 
 const debug = configData.debug_mode;

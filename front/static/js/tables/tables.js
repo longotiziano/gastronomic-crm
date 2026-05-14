@@ -1,4 +1,4 @@
-import configData from '../../../../config.json' with { type: 'json' };
+import configData from '../../../../config/config.json' with { type: 'json' };
 import { obtainRId, loadTableData } from "../utils.js";
 import { tableSearcher } from "../btns/searcher.js";
 import { apiFetch } from "../utils.js";

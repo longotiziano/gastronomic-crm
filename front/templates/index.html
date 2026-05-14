@@ -36,11 +36,11 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
                 </button>
                 <div class="block desplegable">
-                    <ul data-name="restaurant" class="selectables menu-button" data-endpoint="/restaurants/show" data-tablemodel="restaurants">
+                    <ul data-name="r_id" class="selectables menu-button" data-endpoint="/restaurants/show" data-tablemodel="restaurants">
                         <li><button data-restaurant="club_serrano" class="active">Club Serrano</button></li>
                         <li><button data-restaurant="kubo">Kubo</button></li>
                     </ul>
-                    <button class="actionable" id="add-restaurant">+ Agregar restaurante...</button>
+                    <button class="actionable" id="addRestaurant">+ Agregar restaurante...</button>
                 </div>
             </div>
             <ul data-name="section" class="selectables section-ul">
@@ -187,24 +187,24 @@
     </main>
     <!-- Modal para crear restaurante -->
     <div class="modal-overlay">
-        <div class="block modal" data-openby="add-restaurant">
+        <div class="block modal" data-openby="addRestaurant">
             <div class="block-header">
                 <h2>Crear nuevo restaurante</h2>
                 <svg class="x-btn" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
             </div>
             <div class="block-content">
-                <form class="flex-column" id="restaurantForm" data-endpoint="/restaurants/creation">
+                <form class="flex-column" id="createRestaurant" data-endpoint="/restaurants/creation">
                     <div class="form-group">
                         <label for="restaurantName">Nombre del restaurante *</label>
-                        <input type="text" id="restaurantName" name="name" required>
-                    </div>  
+                        <input type="text" id="restaurantName" name="restaurant" required>
+                    </div>
                     <div class="form-group">
-                        <label for="restaurant-image">Seleccionar logo</label>
-                        
-                        <div class="upload" data-uploaderid="restaurant-image" >
-                            <input type="file" id="restaurant-image" name="address" accept="image/*">
+                        <label for="restaurantImage">Seleccionar logo</label>
+
+                        <div class="upload" data-uploaderid="restaurantImage">
+                            <input type="file" id="restaurantImage" name="image_url" accept="image/*">
                             <div class="actionable">
-                                <div style="visibility: hidden; width: 100%;">    
+                                <div style="visibility: hidden; width: 100%;">
                                     <span class="file-name">Archivo seleccionado</span>
                                     <svg class="x-btn" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                                 </div>
@@ -216,8 +216,8 @@
                 </form>
             </div>
             <div class="block-footer">
-                <button type="button" class="btn-cancel" id="cancelRestaurantModal">Cancelar</button>
-                <button type="submit" class="btn-submit" form="restaurantForm">Crear restaurante</button>
+                <button type="button" class="btn-cancel">Cancelar</button>
+                <button type="submit" class="btn-submit" form="createRestaurant">Crear restaurante</button>
             </div>
         </div>
     </div>

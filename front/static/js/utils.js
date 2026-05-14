@@ -1,4 +1,4 @@
-import configData from '../../../config.json' with { type: 'json' };
+import configData from '../../../config/config.json' with { type: 'json' };
 const DEFAULT_RESTAURANT = configData.default_values.default_restaurant;
 const API_URL = configData.api_url;
 const debug = configData.debug_mode;
@@ -42,9 +42,14 @@ export const apiFetch = async (endpoint, options = {}) => {
     const { body, ...restOptions } = options;
 
     const isFormData = body instanceof FormData;
+    if (debug && isFormData) {
+        console.log(`FormData: ${isFormData} | Content:`);
+        for (let [key, value] of body.entries()) {
+            console.log(`Key: ${key} | Value: ${value}`);
+        }
+    }
 
     const res = await fetch(url, {
-        // Si es FormData no seteamos Content-Type, el browser lo hace solo
         headers: isFormData ? {} : { "Content-Type": "application/json" },
         ...restOptions,
         body: isFormData ? body : body ? JSON.stringify(body) : undefined
@@ -70,7 +75,7 @@ export const apiFetch = async (endpoint, options = {}) => {
  */
 export const loadTableData = async (container, offset = 0, lookedName = "", requiresRId = false, renderCallback = null) => {
     const params = new URLSearchParams();
-    if (requiresRId) params.append('restaurant', obtainRId());
+    if (requiresRId) params.append('r_id', obtainRId());
     if (offset) params.append('offset', offset);
     if (lookedName) params.append('looked_name', lookedName);
 

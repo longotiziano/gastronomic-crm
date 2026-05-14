@@ -1,9 +1,9 @@
 from app.models.restaurant import Restaurant
 from app.repositories.restaurants_repo import RestaurantRepository
 from app.sql.database import Sess
-from app.utils.helpers import error_response, calculate_pagination, success_response
+from app.utils.helpers import error_response, success_response
 
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, request
 
 from app.logs.loggers import start_logger
 logger = start_logger(__name__)
@@ -15,20 +15,22 @@ def create_restaurant():
     """
     Creates a restaurant
     """
-    data = request.get_json(silent=True)
+    restaurant = request.form.get('restaurant')
+    logo = request.files.get('image_url')
+    logger.debug("Received data for restaurant creation -> Data: %s | URL: %s", data, str(request.url))
     if not data:
         return error_response(f"Didn't receive any required parameters to create the restaurant", "MISSING_PARAMETERS", 400)
     
     with Sess() as sess:
         res_repo = RestaurantRepository(sess)
         try:
-            restos = res_repo._get_restaurants(data["restaurant"])[0]
+            restos = res_repo._get_restaurants(r_id = data["restaurant"])[0]
         except Exception as e:
             return error_response(str(e), "INTERNAL_SERVER_ERROR", 500)
         
         if not restos:
             try:
-                new_resto = Restaurant(name=data["restaurant"], image_url=data["image_url"])
+                new_resto = Restaurant(restaurant=restaurant, image_url=data["image_url"])
                 sess.add(new_resto)
                 sess.commit()
                 sess.refresh(new_resto)
