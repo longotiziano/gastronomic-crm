@@ -6,6 +6,6 @@ public_bp_errors = Blueprint("public_errors", __name__, url_prefix="/public/erro
 @public_bp_errors.errorhandler(APIException)
 def handle_errors(error):
     return jsonify({
-        "error": error.mensaje,
-        "code": error.status_code
-    }), error.status_code
+        "error": error.error_type,
+        "message": error.msg
+    }), error.code

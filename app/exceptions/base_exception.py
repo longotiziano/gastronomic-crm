@@ -9,12 +9,14 @@ class APIException(Exception):
         msg: str, 
         error_type: str,
         code: int = 400,
+        data = dict
     ):
         super().__init__(msg)
         self.msg = msg
         self.error_type = error_type
         self.code = code
-        
+        self.data = data
+
         self._log_error()
 
     def _log_error(self):
@@ -29,10 +31,13 @@ class ResourceNotFoundException(APIException):
         super().__init__(f"Couldn't find the resource {resource}", "RESOURCE_NOT_FOUND", 400)
 
 class RecordMismatchException(APIException):
-    def __init__(self, expected: Any, obtained: Any, ):
-        super().__init__("", code=409)
+    def __init__(self, expected: Any, obtained: Any, data: dict = {}):
+        msg = f"Record mismatch occur. Expected: {expected}, obtained: {obtained}."
+        super().__init__(msg, "RECORD_MISMATCH_ERROR", 409, data)
 
 class InventoryShortageException(RecordMismatchException):
-    def __init__(self, product_name):
-        super().__init__(f"No hay stock suficiente para el producto: {product_name}.") 
+    def __init__(self, rm_dict: dict[str, float] = {}):
+        """Receives a dict with the affected raw material and the missing amount"""
+        msg = "Not enough stock to upload the sale. Missing raw material."
+        super().__init__(msg, "INVENTORY_SHORTAGE_ERROR", data=rm_dict) 
         
