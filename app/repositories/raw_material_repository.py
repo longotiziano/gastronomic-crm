@@ -1,4 +1,5 @@
-from app.models.auto_models import RawMaterial, Stock
+from app.models.raw_material import RawMaterial
+from app.models.stock import Stock
 from app.repositories.base_repository import Repository
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import joinedload
@@ -12,9 +13,8 @@ class RawMaterialRepository(Repository):
     """
     Contains the interactions related to the raw material's tables
     """
-    model = RawMaterial
-    name = 'rm_name'
-    id = 'rm_id'
+    def __init__(self, session):
+        super().__init__(session, RawMaterial, "rm_name", "rm_id")
     
     def _rm_df_to_dict(self, df: pd.DataFrame) -> dict[str, float]:
         '''

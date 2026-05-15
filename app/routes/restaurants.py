@@ -24,7 +24,7 @@ def create_restaurant():
     with Sess() as sess:
         res_repo = RestaurantRepository(sess)
         try:
-            restos = res_repo._get_restaurants(r_id = data["restaurant"])[0]
+            restos = res_repo._get_records(r_id=data["restaurant"])[0]
         except Exception as e:
             return error_response(str(e), "INTERNAL_SERVER_ERROR", 500)
         

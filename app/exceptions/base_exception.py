@@ -1,26 +1,36 @@
+from typing import Any
+
+from logs.loggers import start_logger
+logger = start_logger(__name__)
+
 class APIException(Exception):
     def __init__(
         self, 
         msg: str, 
         error_type: str,
-        r_id: int = -9999,
-        code: int = 400
+        code: int = 400,
     ):
         super().__init__(msg)
         self.msg = msg
         self.error_type = error_type
-        self.r_id = r_id
         self.code = code
+        
+        self._log_error()
+
+    def _log_error(self):
+        logger.error("ERROR: %s | Message: %s | Code: %s", self.error_type, self.msg, self.r_id, self.code)
+
+class InternalServerException(APIException):
+    def __init__(self):
+        super().__init__("Unexpected internal error occur. Try again later", "INTERNAL_SERVER_ERROR", 500)
 
 class ResourceNotFoundException(APIException):
-    def __init__(self, resource_name, resource_id):
-        message = f"El recurso '{resource_name}' con ID {resource_id} no existe."
-        super().__init__(message, status_code=404)
+    def __init__(self, resource: str):
+        super().__init__(f"Couldn't find the resource {resource}", "RESOURCE_NOT_FOUND", 400)
 
 class RecordMismatchException(APIException):
-    def __init__(self, detail_message):
-        # Usamos 409 Conflict o 400 Bad Request según prefieras
-        super().__init__(detail_message, status_code=409)
+    def __init__(self, expected: Any, obtained: Any, ):
+        super().__init__("", code=409)
 
 class InventoryShortageException(RecordMismatchException):
     def __init__(self, product_name):

@@ -6,60 +6,63 @@ from sqlalchemy.exc import SQLAlchemyError
 from app.logs.loggers import start_logger, raise_and_log
 logger = start_logger(__name__)
 
+from typing import TypeVar
+T = TypeVar('T')
+
 class Repository():
     """
     Main repository. Contains common methods and attributes that share both products and raw materials repositories.
 
     The attributes 'model', 'name' and 'id' are crucial. They are going to be replaced for each repository for it's columns' name.
     """
-    model = None
-    name: str = ""
-    id: str = ""
-    
-    def __init__(self, session):
+    def __init__(self, session, model, name, id):
         self.session = session
-    
-    def _count_records(self, name_looked: str = "") -> int:
+        self.model = model
+        self.name = name
+        self.id = id
+        
+    def _build_filtered_query(self, **filters):
         """
-        ### Receives:
-        - A name
-        ### Returns:
-        - The amounts of records that match the received name
+        Builds a query based on the parameters received
+        - Parameters structure: <column_name>=<condition>
         """
-        try:
-            records = self.session.query(model).filter(model.name.ilike(f"%{name_looked}%")).count()
-        except SQLAlchemyError as e:
-            raise_and_log("Unexpected server error during the products' records extraction", e, logger)
-        return records
+        query = self.session.query(self.model)
+        
+        for key, value in filters.items():
+            if value is not None and value != "":
+                column = getattr(self.model, key, None)
+                if column is not None:
+                    if hasattr(column.type, 'python_type') and column.type.python_type is str:
+                        query = query.filter(column.ilike(f"%{value}%"))
+                    else:
+                        query = query.filter(column == value)
+        return query
 
-    def _get_records(
-        self, 
-        r_id: int, 
-        actual_offset: int = 0, 
-        page_size: int = 10, 
-        name_looked: str = ""
-    ) -> list[model]:
+    def _count_records(self, **kwargs) -> int:
         """
-        Returns a list of tuples based on an offset and page size.
-        ### Receives:
-        - Offset
-        - Name looked
-        ### Returns:
-        - List of objects of the selected model
+        Counts the records that match the conditions
+        - Parameters structure: <column_name>=<condition>
         """
         try:
-            results: list[model] = self.session.query(model)\
-                        .filter(model.name.ilike(f"%{name_looked}%"))\
-                        .filter(model.r_id == r_id)\
-                        .offset(actual_offset)\
-                        .limit(page_size)\
-                        .all()
+            query = self._build_filtered_query(**kwargs)
+            return query.count()
         except SQLAlchemyError as e:
-            raise_and_log("Unexpected server error during the records extraction", e, logger)
-        if not results:
-            logger.warning("Couldn't find any results while looking for records that match '%s'", name_looked)
-            return [{}]
-        return results
+            raise_and_log("Error al contar registros", e, logger)
+
+    def _get_records(self, **kwargs) -> list[T]:
+        """
+        Returns a list of the actual object that match the conditions
+        - Parameters structure: column_name=condition
+        - Pagination: actual_offset=int, page_size=int
+        """
+        try:
+            offset = int(kwargs.pop('actual_offset', 0))
+            limit = int(kwargs.pop('page_size', 10))
+            query = self._build_filtered_query(**kwargs)
+            return query.offset(offset).limit(limit).all()
+        
+        except SQLAlchemyError as e:
+            raise_and_log("Error al extraer registros", e, logger)
     
     def obtain_name_id_dict(self, r_id: int) -> tuple[bool, dict]:
         '''
