@@ -23,6 +23,11 @@ Those are divs that contains two brother elements:
     left: 0;
 }
 
+.menu-button li {
+    display: flex;
+    position: relative;
+}
+
 .selectables.menu-button button {
     margin: 0.1rem;
     font-size: 1rem;

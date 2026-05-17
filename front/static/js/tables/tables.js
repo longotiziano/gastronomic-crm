@@ -1,8 +1,9 @@
-import configData from '../../../../config/config.json' with { type: 'json' };
 import { obtainRId, loadTableData } from "../utils.js";
 import { tableSearcher } from "../btns/searcher.js";
 import { apiFetch } from "../utils.js";
+import { initEditBtns } from "../btns/edit.js";
 
+import configData from '../../../../config/config.json' with { type: 'json' };
 const debug = configData.debug_mode;
 
 /**
@@ -16,10 +17,10 @@ const renderTable = (tableContainer, data, cols) => {
     // making the columns
     const htmlCols = cols.map(col => `<th>${col}</th>`).join('');
     const htmlHeader = `<tr>${htmlCols}</tr>`;
-    // making the rows
+    // making the rows 
     const htmlRows = data.map(row => {
         const rowData = cols.map(col => `<td>${row[col]}</td>`).join('');
-        return `<tr>${rowData}</tr>`;
+        return `<tr>${rowData}<td class="edit-btn"></td></tr>`;
     }).join('');
     // inserting the HTML
     tableContainer.innerHTML = `
@@ -28,6 +29,7 @@ const renderTable = (tableContainer, data, cols) => {
             <tbody>${htmlRows}</tbody>
         </table>
     `;
+    initEditBtns(tableContainer);
 };
 
 /**

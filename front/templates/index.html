@@ -21,10 +21,12 @@
     <link rel="stylesheet" href="../static/css/btns/menus.css">
     <link rel="stylesheet" href="../static/css/btns/uploaders.css">
     <link rel="stylesheet" href="../static/css/btns/searcher.css">
+    <link rel="stylesheet" href="../static/css/btns/edit.css">
     <link rel="stylesheet" href="../static/css/general/tables.css">
     
     <link rel="icon" href="../static/img/icon-club-serrano.jpg" type="image/jpg"/>
 
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script type="module" src="../static/js/main.js" defer></script>
 </head>
 <body>
@@ -188,6 +190,42 @@
     <!-- Modal para crear restaurante -->
     <div class="modal-overlay">
         <div class="block modal" data-openby="addRestaurant">
+            <div class="block-header">
+                <h2>Crear nuevo restaurante</h2>
+                <svg class="x-btn" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </div>
+            <div class="block-content">
+                <form class="flex-column" id="createRestaurant" data-endpoint="/public/restaurants/creation">
+                    <div class="form-group">
+                        <label for="restaurantName">Nombre del restaurante *</label>
+                        <input type="text" id="restaurantName" name="restaurant" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="restaurantImage">Seleccionar logo</label>
+
+                        <div class="upload" data-uploaderid="restaurantImage">
+                            <input type="file" id="restaurantImage" name="image_url" accept="image/*">
+                            <div class="actionable">
+                                <div style="visibility: hidden; width: 100%;">
+                                    <span class="file-name">Archivo seleccionado</span>
+                                    <svg class="x-btn" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                                </div>
+                                <svg style="visibility: visible; position: absolute;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-from-line-icon lucide-arrow-up-from-line"><path d="m18 9-6-6-6 6"/><path d="M12 3v14"/><path d="M5 21h14"/></svg>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="block-footer">
+                <button type="button" class="btn-cancel">Cancelar</button>
+                <button type="submit" class="btn-submit" form="createRestaurant">Crear restaurante</button>
+            </div>
+        </div>
+    </div>
+    <!-- Modal para editar restaurante -->
+    <div class="modal-overlay">
+        <div class="block modal" data-openby="editRestaurant">
             <div class="block-header">
                 <h2>Crear nuevo restaurante</h2>
                 <svg class="x-btn" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>

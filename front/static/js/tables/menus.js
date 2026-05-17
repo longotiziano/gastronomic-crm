@@ -1,14 +1,16 @@
-import configData from '../../../../config/config.json' with { type: 'json' };
+import { initEditBtns } from "../btns/edit.js";
 import { apiFetch, loadTableData } from "../utils.js";
 
+import configData from '../../../../config/config.json' with { type: 'json' };
 const debug = configData.debug_mode;
 
 const renderMenu = (menuUl, data, col) => {
     if (debug) console.log(`Data received -> Data: ${JSON.stringify(data)}`);
     const name = menuUl.dataset.name;
-    const htmlList = data.map(row => `<li><button data-${name}="${row[col]}">${row[col]}</button></li>`).join('');
+    const htmlList = data.map(row => `<li><button data-${name}="${row[col]}">${row[col]}</button><div class="edit-btn"></div></li>`).join('');
     // inserting the HTML
     menuUl.innerHTML = htmlList;
+    initEditBtns(menuUl);
 };
 
 /**

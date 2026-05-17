@@ -15,10 +15,14 @@
     width: 100%;
 }
 
-.selectables:not(.section-ul) button:hover, .actionable:hover, .x-btn:hover, 
-.table-container tbody > tr:hover {
+.selectables:not(.section-ul) button:hover, 
+.actionable:hover, 
+.x-btn:hover, 
+.table-container tbody > tr:hover,
+.edit-btn:hover {
     background-color: rgba(124, 124, 124, 0.123);
     cursor: pointer;
+    border-radius: 5px;
 }
 
 .nav-button {
