@@ -1,7 +1,6 @@
 from app.repositories.products_repository import ProductsRepository
-from app.repositories.restaurants_repo import RestaurantRepository
 from app.sql.database import Sess
-from app.utils.helpers import error_response, success_response, calculate_pagination
+from app.utils.helpers import success_response, calculate_pagination
 
 from flask import Blueprint, jsonify, request
 from werkzeug.datastructures import FileStorage
@@ -29,31 +28,24 @@ def submit_sales_file():
     logger.info("Succesfully created the response -> URL: %s", str(request.url))
     return jsonify({"success": True})
 
-@sales_bp.route('/show_products', methods=['GET'])
+@sales_bp.route('/show', methods=['GET'])
 def show_products():
     """
     Shows the products for a given restaurant
-    ### Receives:
-    - File
-    ### Returns
     """
     r_id = request.args.get("r_id", type=int)
     offset = request.args.get("offset", type=int, default=0)
     page_size = request.args.get("limit", type=int, default=13)
     looked_name = request.args.get("looked_name", type=str, default="")
-    if not r_id:
-        return error_response("Couldn't find any selected restaurant. Please, choose a restaurant to continue.", "MISSING_PARAMETERS", 400)
     
     with Sess() as sess:
         prod_repo = ProductsRepository(sess)
-        try: 
-            results = prod_repo._get_records(r_id=r_id, actual_offset=offset, page_size=page_size, product_name=looked_name)
-            total_results = prod_repo._count_records(product_name=looked_name)
-        except Exception as e:
-            return error_response(str(e), "INTERNAL_SERVER_ERROR", 500)
+        results = prod_repo._get_records(r_id=r_id, actual_offset=offset, page_size=page_size, product_name=looked_name)
+        prods = [prod._to_dict() for prod in results]
+        total_results = prod_repo._count_records(product_name=looked_name)
         
     prev, next, pages = calculate_pagination(offset, total_results, page_size)
-    response = success_response("Products retrieved successfully.", {"products": results}, str(request.url), 200, prev, next, pages)
+    response = success_response("Products retrieved successfully.", {"products": prods}, str(request.url), 200, prev, next, pages)
     logger.info("Succesfully created the response -> URL: %s", str(request.url))
     return response
         

@@ -1,6 +1,9 @@
 import { apiFetch } from "./utils.js";
 import { showFile, receiveFile } from "./btns/uploaders.js";
 
+import configData from '../../../config/config.json' with { type: 'json' };
+const debug = configData.debug_mode;
+
 export const initForms = () => {
     const forms = document.querySelectorAll('form[data-endpoint]');
     forms.forEach(form => {
@@ -14,7 +17,7 @@ export const initForms = () => {
                     method: 'POST',
                     body: formData
                 });
-                console.log('Success:', data);
+                if (debug) console.log('Success:', data);
             } catch (error) {
                 console.error('Error:', error);
             }

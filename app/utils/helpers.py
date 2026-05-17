@@ -1,4 +1,8 @@
+from app.exceptions.internal_errors import CloudinaryException
+
+import cloudinary.uploader
 from flask import Response, jsonify
+from werkzeug.datastructures import FileStorage
 
 def calculate_pagination(actual_offset: int, total_records: int, page_size: int) -> tuple[int, int, int]:
     """
@@ -44,16 +48,12 @@ def success_response(
         }
     }), code
 
-def upload_image(file) -> str:
+def upload_image(file: FileStorage) -> str:
     """
-    Uploads the image to the server and returns the URL
-    ### Receives:
-    - File
-    ### Returns:
-    - URL of the uploaded image
+    Receives a file and uploads it to Cloudinary, returning the secure URL of the uploaded image.
     """
-    # Aquí iría la lógica para subir la imagen a un servicio de almacenamiento (como AWS S3, Google Cloud Storage, etc.)
-    # y luego devolver la URL de la imagen subida.
-    # Por simplicidad, vamos a simular esto devolviendo una URL ficticia.
-    return f"https://example.com/images/{file.filename}"
-
+    try:
+        result = cloudinary.uploader.upload(file)
+    except Exception as e:
+        raise CloudinaryException(str(e)) from e
+    return result['secure_url']

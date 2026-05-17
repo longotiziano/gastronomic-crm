@@ -1,26 +1,45 @@
-from app.routes.sales import sales_bp
-from app.routes.restaurants import resto_bp
-from app.models import * # for registration
+from app.models import *
 
-# Logger
-from app.logs.config import setup_logging
-setup_logging()
+def create_app():
+    # Blueprints 
+    from app.routes.sales import sales_bp
+    from app.routes.restaurants import resto_bp
 
-# Database
-from app.sql.database import Base, engine
-Base.metadata.create_all(engine)
+    # Logger
+    from app.logs.config import setup_logging
+    setup_logging()
 
-# Flask
-from flask import Flask
-app = Flask(__name__)
+    # Database
+    from app.sql.database import Base, engine
+    Base.metadata.create_all(engine)
 
-# CORS
-from flask_cors import CORS
-CORS(app)
+    # Cloudinary
+    import config.cloudinary
 
-# Blueprints
-app.register_blueprint(sales_bp)
-app.register_blueprint(resto_bp)
+    # Flask
+    from flask import Flask, jsonify
+    app = Flask(__name__)
+
+    from app.exceptions.base_exception import APIException
+    @app.errorhandler(APIException)
+    def handle_errors(error: APIException):
+        return jsonify({
+            "error": error.error_type,
+            "message": error.msg,
+            "data": error.data
+        }), error.code
+
+    # CORS
+    from flask_cors import CORS
+    CORS(app)
+
+    # Blueprints
+    app.register_blueprint(sales_bp)
+    app.register_blueprint(resto_bp)
+
+    return app
+
 
 if __name__ == '__main__':
+    app = create_app()
     app.run(debug=True, port=5000)

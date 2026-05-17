@@ -1,4 +1,4 @@
-import configData from '../../../../config.json' with { type: 'json' };
+import configData from '../../../../config/config.json' with { type: 'json' };
 import { obtainRId, apiFetch } from '../utils.js';
 
 const DEFAULT_RESTAURANT = configData.default_values.default_restaurant;

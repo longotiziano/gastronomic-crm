@@ -13,7 +13,6 @@ const debug = configData.debug_mode;
  * @param {Array} cols
  */
 const renderTable = (tableContainer, data, cols) => {
-    if (debug) console.log(`Data received -> Data: ${JSON.stringify(data)}`);
     // making the columns
     const htmlCols = cols.map(col => `<th>${col}</th>`).join('');
     const htmlHeader = `<tr>${htmlCols}</tr>`;
@@ -48,7 +47,7 @@ export const initTables = () => {
         if (debug) console.log(searcher.outerHTML);
         const tableModel = table.dataset.tablemodel;
         const cols = configData.models[tableModel].cols_displayed;
-        console.log(`Columns finded -> Columns: ${cols} | Function: ${initTables.name}`);
+        if (debug) console.log(`Columns finded -> Columns: ${cols} | Function: ${initTables.name}`);
         // creates the table for the first time
         loadTableData(table, 0, "", true, (container, data) => renderTable(container, data, cols));
         tableSearcher(searcher, (lookedName) => {

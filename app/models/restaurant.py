@@ -19,8 +19,8 @@ class Restaurant(Base):
     __tablename__ = "restaurants"
 
     r_id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    restaurant: Mapped[Optional[str]] = mapped_column(Text)
-    image_url: Mapped[str] = mapped_column(Text)
+    restaurant: Mapped[Optional[str]] = mapped_column(Text, nullable=False, unique=True)
+    image_url: Mapped[str] = mapped_column(Text, nullable=True, default=None)
 
     # relaciones
     products: Mapped[list["Product"]] = relationship(back_populates="restaurant")

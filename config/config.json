@@ -11,7 +11,7 @@
         }
     },
     "default_values": {
-        "default_restaurant": "club_serrano"
+        "default_restaurant": 1
     },
     "api_url": "http://127.0.0.1:5000",
     "debug_mode": true

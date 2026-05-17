@@ -1,4 +1,4 @@
-import configData from '../../../../config.json' with { type: 'json' };
+import configData from '../../../../config/config.json' with { type: 'json' };
 
 const debug = configData.debug_mode;
 
