@@ -13,9 +13,8 @@ class RawMaterialCategory(Base):
 
     rmc_id: Mapped[int] = mapped_column(Integer, primary_key=True)
     rmc_name: Mapped[str] = mapped_column(Text, nullable=False)
-    rmc_section: Mapped[Optional[str]] = mapped_column(Text)
+    rmc_section: Mapped[Optional[str]] = mapped_column(Text, nullable=False)
 
-    # relaciones
     raw_materials: Mapped[list["RawMaterial"]] = relationship(back_populates="category")
 
     def __repr__(self):

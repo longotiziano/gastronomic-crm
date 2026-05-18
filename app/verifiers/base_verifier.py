@@ -1,33 +1,20 @@
 from app.repositories.raw_material_repository import RawMaterialRepository
-import pandas as pd
-    
+
+from sqlalchemy import inspect
+
+from typing import Generic, TypeVar
+T = TypeVar('T')
+
 from app.logs.loggers import start_logger
 logger = start_logger(__name__)
 
-class Verifier():
-    """
-    Main verifier. Contains common methods and attributes that share both products and raw materials verifiers.
+class Verifier(Generic[T]):
+    def __init__(self, model):
+        self.model = model
 
-    The attributes 'model' and 'name' are crucial. They are going to be replaced for each verifier for it's columns' name.    
-    """
-    model = None
-    name: str = ""
-
-    def __init__(self, session):
-        self.session = session
-
-    def _get_existing_values(self, r_id: int) -> list:
-        ''' 
-        ### Receives:
-        - r_id
-        ### Returns:
-        - A list with the names of the elements of the class. For example, if this method is used in ProductsRepository, then it will show a list of all the products
-        '''
-        return [
-            getattr(r, self.name)
-            for r in self.session.query(self.model).filter(getattr(self.model, 'r_id') == int(r_id)).all()
-        ]    
-
+    def _obtain_required_cols(self):
+        _mapper = inspect(self.model)
+        return [name for name, col in _mapper.columns.items() if not col.nullable]
 
 class VerifyExistence(Verifier):
     def verify_existence_from_df(self, r_id: int, df: pd.DataFrame) -> tuple[bool, None | list]:

@@ -5,11 +5,11 @@ from app.models import restaurant
 from app.models.raw_material import RawMaterial
 from app.models.product import Product
 from app.models.recipe import Recipe
+from app.utils.helpers import upload_image
+
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 
-
-from app.utils.helpers import upload_image
 from typing import Generic, TypeVar
 T = TypeVar('T')
 

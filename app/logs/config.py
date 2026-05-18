@@ -1,8 +1,7 @@
 import os
-from pathlib import Path
 import logging.config 
 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+from api_app import BASE_DIR
 CSV_LOG_FILE = BASE_DIR / "app" / "logs" / "logs.csv"
 
 if not os.path.exists(CSV_LOG_FILE):

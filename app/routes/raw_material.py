@@ -8,13 +8,21 @@ from flask import Blueprint, request
 from app.logs.loggers import start_logger
 logger = start_logger(__name__)
 
-from app.logs.config import BASE_DIR
-import json
-CONFIG_FILE = BASE_DIR / "config" / "config.json"
-with open(CONFIG_FILE, "r") as f:
-    config = json.load(f)
-
 public_rm_bp = Blueprint('public_raw_material_bp', __name__, url_prefix='/public/raw_materials')
+
+@public_rm_bp.route('/creation', methods=['POST'])
+def create_rm():
+    data = request.get_json(silent=True)
+    logger.debug("Received data for raw material creation -> Data: %s | URL: %s", restaurant, str(request.url))
+    if not restaurant:
+        raise MissingParametersException(["restaurant"])
+    
+    with Sess() as sess:
+        res_repo = RestaurantRepository(sess)
+        new_resto = res_repo.create_record(restaurant=restaurant, image_url=logo)
+
+    logger.info("Created the restaurant -> ID: %s | Name: %s", new_resto.r_id, new_resto.restaurant)
+    return success_response("Restaurant created successfully", {"restaurant": new_resto._to_dict()}, str(request.url), 201)
 
 @public_rm_bp.route('/show', methods=['GET'])
 def show_rms():

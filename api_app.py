@@ -1,5 +1,3 @@
-from app.models import *
-
 def create_app():
     # Blueprints 
     from app.routes.sales import sales_bp
@@ -39,7 +37,16 @@ def create_app():
 
     return app
 
-
 if __name__ == '__main__':
+    from app.models import *
+
+    # Configuration
+    from pathlib import Path
+    import json
+    BASE_DIR = Path(__file__).resolve().parent
+    CONFIG_FILE_PATH = BASE_DIR / "config" / "config.json"
+    with open(CONFIG_FILE_PATH, "r") as f:
+        CONFIG_FILE = json.load(f)
+
     app = create_app()
     app.run(debug=True, port=5000)

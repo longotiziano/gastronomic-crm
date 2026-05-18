@@ -8,10 +8,18 @@
             "cols": [],
             "cols_displayed": ["restaurant"],
             "cols_required": ["restaurant"]
+        },
+        "raw_material": {
+            "cols": [],
+            "cols_displayed": ["rm_name", "rm_category", "stock_amount", "uom"],
+            "cols_required": ["rm_name", "rm_category"]
         }
     },
     "default_values": {
         "default_restaurant": 1
+    },
+    "endpoints": {
+        "products": {}
     },
     "api_url": "http://127.0.0.1:5000",
     "debug_mode": true
